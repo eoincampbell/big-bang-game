@@ -1,0 +1,1 @@
+puts ['R','P','L','S'].sample

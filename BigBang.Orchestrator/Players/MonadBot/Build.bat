@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Haskell Platform\2013.2.0.0\bin\ghc.exe" MonadBot.hs
