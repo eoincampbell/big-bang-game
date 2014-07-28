@@ -1,0 +1,18 @@
+class Progressive
+    def main
+        args = CobraCore.commandLineArgs
+        rng = Random()
+        if args.count == 1, Console.write('RPSLV'[rng.next(5)])
+        else
+            them = List<of char>(args[2].toCharArray)
+            me = List<of char>(args[1].toCharArray)
+            options = List<of char>()
+            for num in me.count
+                if '[me[num]][them[num]]' in ['SP','PR','RL','LV','VS','SL','PV','RS','LP','VR'], options.add(me[num])
+                else if '[them[num]][me[num]]' in ['SP','PR','RL','LV','VS','SL','PV','RS','LP','VR'], options.add(them[num])
+                else, pass
+            while options.count > 1
+                options.reverse
+                if rng.next(3) == 0, break
+                else, options.pop
+            Console.write(if(options.count,options.last,'RPSLV'[rng.next(5)]))

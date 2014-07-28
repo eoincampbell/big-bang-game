@@ -1,0 +1,74 @@
+@number float
+class Bot
+    def main
+        index = {c'R':0,c'P':1,c'S':2,c'L':3,c'V':4}
+        win = @[@[2,3],@[0,4],@[1,3],@[1,4],@[0,2]]
+        lose = @[@[1,4],@[2,3],@[0,4],@[0,2],@[1,3]]
+        args = CobraCore.commandLineArgs
+        rng = Random()
+        path = CobraCore.exePath.split('\\')[:-1].join('\\')+'\\data'
+        if not Directory.exists(path), Directory.createDirectory(path)
+        past_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
+        past_frequency = List<of uint64>(uint64[](5))
+        if File.exists(path+'\\history.txt')
+            new_game = false
+            for num, line in File.readAllLines(path+'\\history.txt').numbered
+                for n in 5
+                    past_history[num][n] = uint64.parse(line.split[n])
+                    past_frequency[n] += uint64.parse(line.split[n])
+        else, new_game = true
+        this_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
+        this_frequency = List<of uint64>(uint64[](5))
+        if new_game, Console.write('RPSLV'[rng.next(5)])
+        else if args.count <> 3
+            options = List<of float>(float[](5))
+            for n in 5
+                all_weight = past_frequency[n]/if(.sum(past_frequency),.sum(past_frequency),1)
+                for m in win[n]
+                    options[m] += all_weight*2
+                options[n] += all_weight
+                for m in lose[n]
+                    options[m] -= all_weight*2
+            temp_selection = List<of int>()
+            for num, o in options.numbered
+                if o == options.sorted.last
+                    temp_selection.add(num)
+            Console.write('RPSLV'[temp_selection[rng.next(temp_selection.count)]])
+        else
+            for num, move in args[1].numbered
+                this_history[index[move]][index[args[2][num]]] += 1
+                this_frequency[index[move]] += 1
+                this_frequency[index[args[2][num]]] += 1
+            me_last = index[args[1][args[1].length-1]]
+            them_last = index[args[2][args[2].length-1]]
+            turns = args[1].length
+            options = List<of float>(float[](5))
+            for n in 5
+                this_rchan = this_history[me_last][n]/if(.sum(this_history[me_last]),.sum(this_history[me_last]),1)
+                this_rcert = this_history[me_last][n]/(if(this_frequency[me_last],this_frequency[me_last],1)/5f)
+                this_weight = this_rchan*this_rcert*turns/10
+                all_rchan = past_history[me_last][n]/if(.sum(past_history[me_last]),.sum(past_history[me_last]),1)
+                all_rcert = past_history[me_last][n]/(if(past_frequency[me_last],past_frequency[me_last],1)/5f)
+                all_weight = all_rchan*all_rcert
+                for m in win[n]
+                    options[m] -= this_weight*2 + all_weight*2
+                options[n] -= this_weight + all_weight
+                for m in lose[n]
+                    options[m] += this_weight*2 + all_weight*2
+            temp_selection = List<of int>()
+            for num, o in options.numbered
+                if o == options.sorted.last
+                    temp_selection.add(num)
+            Console.write('RPSLV'[temp_selection[rng.next(temp_selection.count)]])
+            past_history[me_last][them_last] += 1
+
+        # write the history file
+        record = List<of String>()
+        for entry in past_history
+            record.add(entry.join(' '))
+        File.writeAllLines(path+'\\history.txt',record)
+
+    def sum(list as List<of uint64>) as uint64
+        num = 0u64
+        for entry in list, num += entry
+        return num

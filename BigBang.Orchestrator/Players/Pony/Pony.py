@@ -25,21 +25,20 @@ def prediction(hist):
                   or cand_b[-1:])
 
     # analyze which moves were used how often
-    freq_m = [0, 0, 0, 0, 0]
-    freq_o = [0, 0, 0, 0, 0]
+    freq_m, freq_o = [0]*5, [0]*5
     for m in hist:
         freq_m[m[0]] += 1
         freq_o[m[1]] += 1
 
     # return predictions
-    return ([hist[-i][p] for i in 1,2 for p in 0,1]+    # repeat last moves
+    return ([hist[-i][p] for i in 1,2 for p in 0,1]+   # repeat last moves
             [hist[cand_m[-1]+1][0],     # history matching of my own moves
              hist[cand_o[-1]+1][1],     # history matching of opponent's moves
              hist[cand_b[-1]+1][0],     # history matching of both
              hist[cand_b[-1]+1][1],
              freq_m.index(max(freq_m)), # my most frequent move
              freq_o.index(max(freq_o)), # opponent's most frequent move
-             0])                        # good old rock
+             0])                        # good old rock (and friends)
 
 
 # what would have been predicted in the last rounds?
@@ -56,6 +55,8 @@ for pred, real in zip(pred_hist[:-1], history[2:]):
         scores[i][(real[1]-pred[i]+4)%5] -= 1
 
 # return best counter move
-best_scores = [max(enumerate(s), key=lambda x: x[1]) for s in scores]
+best_scores = [list(max(enumerate(s), key=lambda x: x[1])) for s in scores]
+best_scores[-1][1] *= 1.001   # bias towards the simplest strategy    
+if best_scores[-1][1]<0.4*len(history): best_scores[-1][1] *= 1.4
 strat, (shift, score) = max(enumerate(best_scores), key=lambda x: x[1][1])
 print moves[(pred_hist[-1][strat]+shift)%5]

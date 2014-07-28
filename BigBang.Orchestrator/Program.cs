@@ -1,14 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Combinatorics.Collections;
+
 namespace BigBang.Orchestrator
 {
     using System.Diagnostics;
-    using System.Security.Cryptography.X509Certificates;
 
     public class Program
     {
+        public static List<Player> players = new List<Player>(){
+                   //.NET
+                    new Player { Author = "EoinC", Language = ".NET", Name = "SimpleRandomBot", BotExecutable = @"SimpleRandomBot\SimpleRandomBot.exe", RequiresCompile = true},
+                    new Player { Author = "HuddleWolf", Language = ".NET", Name = "HuddleWolfHatesBigBangTheory", BotExecutable = @"HuddleWolfHatesBigBangTheory\HuddleWolfHatesBigBangTheory.exe", RequiresCompile = true},
+                    new Player { Author = "ProgramFOX", Language = ".NET", Name = "Echo", BotExecutable = @"Echo\Echo.exe" , RequiresCompile = true},
+                    new Player { Author = "Mikey Mouse", Language = ".NET", Name = "LizardsRule", BotExecutable = @"LizardsRule\LizardsRule.exe" , RequiresCompile = true},
+                   
+                    //JAVA
+                    new Player { Author = "Stranjyr", Language = "Java", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "kaine", Language = "Java", Name = "BoringBot", JavaArgs = "BoringBot", BotExecutable = @"BoringBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe"},
+                    new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmartBot", JavaArgs = "SmartBot", BotExecutable = @"SmartBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Milo", Language = "Java", Name = "DogeBot", JavaArgs = "DogeBot", BotExecutable = @"DogeBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+
+                    //Ruby
+                    new Player { Author = "William Barbosa", Language = "Ruby", Name = "StarWarsFan", BotExecutable = @"StarWarsFan\StarWarsFan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "ConservativeBot", BotExecutable = @"ConservativeBot\ConservativeBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},
+                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "SlowLizard", BotExecutable = @"SlowLizard\SlowLizard.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "FairBot", BotExecutable = @"FairBot\FairBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "Vulcan", BotExecutable = @"Vulcan\Vulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Thaylon", Language = "Ruby", Name = "NitPicker", BotExecutable = @"NitPicker\NitPicker.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "MarkovBot", BotExecutable = @"MarkovBot\MarkovBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+//// BROKEN         new Player { Author = "histocrat", Language = "Ruby", Name = "Analogizer", BotExecutable = @"Analogizer\Analogizer.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+//// BROKEN         new Player { Author = "Rory O'Kane", Language = "Ruby", Name = "RandomlyWeighted", BotExecutable = @"RandomlyWeighted\RandomlyWeighted.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "histocrat", Language = "Ruby", Name = "WereVulcan", BotExecutable = @"WereVulcan\WereVulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "histocrat", Language = "Ruby", Name = "BartBot", BotExecutable = @"BartBot\BartBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "histocrat", Language = "Ruby", Name = "LoopholeAbuser", BotExecutable = @"LoopholeAbuser\LoopholeAbuser.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "histocrat", Language = "Ruby", Name = "Alternator", BotExecutable = @"Alternator\Alternator.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+//// BROKEN         new Player { Author = "Thaylon", Language = "Ruby", Name = "UniformBot", BotExecutable = @"UniformBot\UniformBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "BartSimpson", BotExecutable = @"BartSimpson\BartSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "LisaSimpson", BotExecutable = @"LisaSimpson\LisaSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    
+                    //PYTHON 3
+                    new Player { Author = "Timmy", Language = "Python3", Name = "DynamicBot", BotExecutable = @"DynamicBot\DynamicBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
+                    new Player { Author = "Kyle Kanos", Language = "Python3", Name = "ViolentBot", BotExecutable = @"ViolentBot\ViolentBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
+                    new Player { Author = "Kyle Kanos", Language = "Python3", Name = "LexicographicBot", BotExecutable = @"LexicographicBot\LexicographicBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
+                    new Player { Author = "Trimsty", Language = "Python3", Name = "Herpetologist", BotExecutable = @"Herpetologist\Herpetologist.py", PrefixCommand = @"C:\Python34\python.exe"},                    
+                        
+                    //PYTHON 2
+                    new Player { Author = "bitpwner", Language = "Python2", Name = "AlgorithmBot", BotExecutable = @"AlgorithmBot\AlgorithmBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "undergroundmonorail", Language = "Python2", Name = "TheGambler", BotExecutable = @"TheGambler\TheGambler.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "Emil", Language = "Python2", Name = "Pony", BotExecutable = @"Pony\Pony.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "Claudiu", Language = "Python2", Name = "SuperMarkov", BotExecutable = @"SuperMarkov\SuperMarkov.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "cipher", Language = "Python2", Name = "LemmingBot", BotExecutable = @"LemmingBot\LemmingBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+
+                    //LUA
+                    new Player { Author = "William Barbosa", Language = "Lua", Name = "BarneyStinson", BotExecutable = @"BarneyStinson\BarneyStinson.lua", PrefixCommand = @"C:\Program Files (x86)\Lua\5.1\lua.exe"},
+
+                    //PHP
+                    new Player { Author = "ArcticanAudio", Language = "PHP", Name = "SpockOrRockBot", BotExecutable = @"SpockOrRockBot\SpockOrRockBot.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
+//// BROKEN         new Player { Author = "Hikata Ikaruga", Language = "PHP", Name = "CounterPreferenceBot", BotExecutable = @"CounterPreferenceBot\CounterPreferenceBot.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
+
+                    //PERL
+                    new Player { Author = "PhiNotPi", Language = "Perl", Name = "BayesianBot", BotExecutable = @"BayesianBot\BayesianBot.perl", PrefixCommand = @"C:\strawberry\perl\bin\perl.exe"},                   
+                    new Player { Author = "killmous", Language = "Perl", Name = "MAWBRBot", BotExecutable = @"MAWBRBot\MAWBRBot.perl", PrefixCommand = @"C:\strawberry\perl\bin\perl.exe"},                 
+
+                    //HASKELL
+                    new Player { Author = "DrJPepper", Language = "Haskel", Name = "MonadBot", BotExecutable = @"MonadBot\MonadBot.exe" , RequiresCompile = true},
+
+                    //SH (Cygwin)
+//// BROKEN         new Player { Author = "mccannf", Language = "Bash", Name = "BashRocksBot", BotExecutable = @"BashRocksBot\BashRocksBot.sh", PrefixCommand = @"C:\Cygwin\bin\bash.exe"},        
+    
+                    //JS (Node)
+                    new Player { Author = "mccannf", Language = "JS", Name = "YAARBot", BotExecutable = @"YAARBot\YAARBot.js", PrefixCommand = @"C:\Chocolatey\lib\nodejs.commandline.0.10.29\tools\node.exe"},                    
+
+                    //Cobra
+                    new Player { Author = "Ourous", Language = "Cobra", Name = "QBot", BotExecutable = @"QBot\QBot.exe"},                    
+                    new Player { Author = "Ourous", Language = "Cobra", Name = "GitGudBot", BotExecutable = @"GitGudBot\GitGudBot.exe"},                    
+
+
+                };
+
+
         public static string AppDirectory
         {
             get { return System.Reflection.Assembly.GetExecutingAssembly().Location; }
@@ -16,118 +91,131 @@ namespace BigBang.Orchestrator
 
         public static string PlayerDirectory
         {
-            get { return System.IO.Path.GetDirectoryName(AppDirectory) + "\\Players"; }
+            get { return Path.GetDirectoryName(AppDirectory) + "\\Players"; }
         }
 
         static void Main(string[] args)
         {
-            List<Player> players = new List<Player>(){
-                    //.NET
-                    new Player { Author = "EoinC", Name = "SimpleRandomBot", BotExecutable = @"SimpleRandomBot\SimpleRandomBot.exe", RequiresCompile = true},
-                    new Player { Author = "HuddleWolf", Name = "HuddleWolfHatesBigBangTheory", BotExecutable = @"HuddleWolfHatesBigBangTheory\HuddleWolfHatesBigBangTheory.exe", RequiresCompile = true},
-                    new Player { Author = "ProgramFOX", Name = "Echo", BotExecutable = @"Echo\Echo.exe" , RequiresCompile = true},
-                    new Player { Author = "Mikey Mouse", Name = "LizardsRule", BotExecutable = @"LizardsRule\LizardsRule.exe" , RequiresCompile = true},
-                   
-                    //JAVA
-                    new Player { Author = "Stranjyr", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "kaine", Name = "BoringBot", JavaArgs = "BoringBot", BotExecutable = @"BoringBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe"},
-                    new Player { Author = "Stretch Maniac", Name = "SmartBot", JavaArgs = "SmartBot", BotExecutable = @"SmartBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-
-                    //Ruby
-                    new Player { Author = "William Barbosa", Name = "StarWarsFan", BotExecutable = @"StarWarsFan\StarWarsFan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "Martin Büttner", Name = "ConservativeBot", BotExecutable = @"ConservativeBot\ConservativeBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},
-                    new Player { Author = "Martin Büttner", Name = "SlowLizard", BotExecutable = @"SlowLizard\SlowLizard.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "Martin Büttner", Name = "FairBot", BotExecutable = @"FairBot\FairBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "Martin Büttner", Name = "Vulcan", BotExecutable = @"Vulcan\Vulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "Thaylon", Name = "NitPicker", BotExecutable = @"NitPicker\NitPicker.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "Martin Büttner", Name = "MarkovBot", BotExecutable = @"MarkovBot\MarkovBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-//// BROKEN         new Player { Author = "histocrat", Name = "Analogizer", BotExecutable = @"Analogizer\Analogizer.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-//// BROKEN         new Player { Author = "Rory O'Kane", Name = "RandomlyWeighted", BotExecutable = @"RandomlyWeighted\RandomlyWeighted.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "histocrat", Name = "WereVulcan", BotExecutable = @"WereVulcan\WereVulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    
-                    //PYTHON 3
-                    new Player { Author = "Timmy", Name = "DynamicBot", BotExecutable = @"DynamicBot\DynamicBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
-                    new Player { Author = "Kyle Kanos", Name = "ViolentBot", BotExecutable = @"ViolentBot\ViolentBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
-                    new Player { Author = "Kyle Kanos", Name = "LexicographicBot", BotExecutable = @"LexicographicBot\LexicographicBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
-                    new Player { Author = "Trimsty", Name = "Herpetologist", BotExecutable = @"Herpetologist\Herpetologist.py", PrefixCommand = @"C:\Python34\python.exe"},                    
-                        
-                    //PYTHON 2
-                    new Player { Author = "bitpwner", Name = "AlgorithmBot", BotExecutable = @"AlgorithmBot\AlgorithmBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
-                    new Player { Author = "undergroundmonorail", Name = "TheGambler", BotExecutable = @"TheGambler\TheGambler.py", PrefixCommand = @"C:\Python27\python.exe"},                    
-                    new Player { Author = "Emil", Name = "Pony", BotExecutable = @"Pony\Pony.py", PrefixCommand = @"C:\Python27\python.exe"},                    
-                    new Player { Author = "Claudiu", Name = "SuperMarkov", BotExecutable = @"SuperMarkov\SuperMarkov.py", PrefixCommand = @"C:\Python27\python.exe"},                    
-
-                    //LUA
-                    new Player { Author = "William Barbosa", Name = "BarneyStinson", BotExecutable = @"BarneyStinson\BarneyStinson.lua", PrefixCommand = @"C:\Program Files (x86)\Lua\5.1\lua.exe"},
-
-                    //PHP
-                    new Player { Author = "ArcticanAudio", Name = "SpockOrRockBot", BotExecutable = @"SpockOrRockBot\SpockOrRockBot.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
-
-                    //PERL
-                    new Player { Author = "PhiNotPi", Name = "BayesianBot", BotExecutable = @"BayesianBot\BayesianBot.perl", PrefixCommand = @"C:\strawberry\perl\bin\perl.exe"},                   
-                    new Player { Author = "killmous", Name = "MAWBRBot", BotExecutable = @"MAWBRBot\MAWBRBot.perl", PrefixCommand = @"C:\strawberry\perl\bin\perl.exe"},                 
-
-                    //HASKELL
-                    new Player { Author = "DrJPepper", Name = "MonadBot", BotExecutable = @"MonadBot\MonadBot.exe" , RequiresCompile = true},
-
-                    //SH (Cygwin)
-//// BROKEN         new Player { Author = "mccannf", Name = "BashRocksBot", BotExecutable = @"BashRocksBot\BashRocksBot.sh", PrefixCommand = @"C:\Cygwin\bin\sh.exe"},                 
-
-                };
-
-           // BuildWhereRequired(players);
-
-
-
-            var results = new List<Result>();
-
-            List<Player> playersWhoPlayed = new List<Player>();
-
-            foreach (Player p1 in players.Except(playersWhoPlayed))
+            using (StreamWriter sw = new StreamWriter("Tournament.log", false))
             {
-                playersWhoPlayed.Add(p1);
-                foreach (Player p2 in players.Except(playersWhoPlayed))
+                // BuildWhereRequired(players);
+                var tourneyTimer = new Stopwatch();
+                tourneyTimer.Start();
+                
+                var matches = new Combinations<Player>(players, 2, GenerateOption.WithoutRepetition);
+                var results = new List<Result>();
+
+                foreach (var match in matches)
                 {
-                    var result = Play(p1, p2);
-                    results.Add(result);
+                    Player p1 = null, p2 = null;
+                    try
+                    {
+                        if (match[0] == null || match[1] == null)
+                        {
+                            throw new ApplicationException("One or more players didn't show!");
+                        }
+                        p1 = match[0];
+                        p2 = match[1];
 
-                    Console.WriteLine("Result: {0} vs {1}: {2} - {3}", result.P1, result.P2, result.P1Score, result.P2Score);
-                }
-            }
+                        var result = Play(p1, p2, sw);
+                        results.Add(result);
 
+                        var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}", 
+                            result.P1, 
+                            result.P2, 
+                            result.P1Score,
+                            result.P2Score);
 
-            foreach (var r in results)
-            {
-                var p1 = players.First(p => p == r.P1);
-                var p2 = players.First(p => p == r.P2);
+                        sw.WriteLine("| ");
+                        sw.WriteLine("| {0}", resultMessage);
 
+                        Console.WriteLine(resultMessage);
+                    }
 
-                if (r.P1Score > r.P2Score)
-                {
-                    p1.LeagueScore++;
-                }
-                else if (r.P1Score < r.P2Score)
-                {
-                    p2.LeagueScore++;
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
                 }
 
-                p1.AvgDecisionTimes.Add(r.P1AvgTimeMs);
-                p2.AvgDecisionTimes.Add(r.P2AvgTimeMs);
+                foreach (var r in results)
+                {
+                    var p1 = players.First(p => p == r.P1);
+                    var p2 = players.First(p => p == r.P2);
 
-            }
+                    if (r.P1Score > r.P2Score)
+                    {
+                        p1.LeagueScore++;
+                        p1.Wins++;
+                        p2.Loss++;
+                    }
+                    else if (r.P1Score < r.P2Score)
+                    {
+                        p2.LeagueScore++;
+                        p1.Loss++;
+                        p2.Wins++;
+                    }
+                    else
+                    {
+                        p1.Draw++;
+                        p2.Draw++;
+                    }
+
+                    p1.AvgDecisionTimes.Add(r.P1AvgTimeMs);
+                    p2.AvgDecisionTimes.Add(r.P2AvgTimeMs);
+                }
 
 
-            var resultGrid = players.OrderByDescending(p => p.LeagueScore);
-            Console.WriteLine("| {0} | {1} | {2} | {3} |", "Author".PadRight(20), "Name".PadRight(20), "Score".PadRight(10),
-                "Avg. Time".PadRight(15));
-            Console.WriteLine("+----------------------+----------------------+------------+-----------------+");
-            foreach (var rg in resultGrid)
-            {
-                Console.WriteLine("| {0} | {1} | {2:##0}          | {3:00.00} ms        |", rg.Author.PadRight(20), rg.Name.PadRight(20), rg.LeagueScore, rg.AvgDecisionTimes.Average());
+                var resultGrid = players.OrderByDescending(p => p.LeagueScore);
+                tourneyTimer.Stop();
+                
+
+                var printResults = PrintResultGrid(resultGrid);
+                sw.WriteLine(printResults);
+                sw.WriteLine("Total Matches Completed: {0}", matches.Count);
+                sw.WriteLine("Total Tourney Time: {0}", tourneyTimer.Elapsed);
+
+                Console.WriteLine(printResults);
             }
 
             Console.WriteLine("Done!");
             Console.ReadLine();
+        }
+
+        private static string PrintResultGrid(IEnumerable<Player> resultGrid )
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendFormat("| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |\n",
+                "Author".PadRight(20),
+                "Name".PadRight(40),
+                "Language".PadRight(10),
+                "Score".PadRight(5),
+                "Win".PadRight(5),
+                "Draw".PadRight(5),
+                "Loss".PadRight(5),
+                "Avg. Dec. Time".PadRight(10));
+
+            sb.AppendLine("+----------------------+------------------------------------------+" +
+                "------------+-------+-------+-------+-------+----------------+");
+            
+            foreach (var rg in resultGrid)
+            {
+                sb.AppendFormat("| {0} | {1} | {7} | {2:000}   | {3:000}   | {4:000}   | {5:000}   | {6:0000.00} ms     |\n",
+                    rg.Author.PadRight(20),
+                    rg.Name.PadRight(40),
+                    rg.LeagueScore,
+                    rg.Wins,
+                    rg.Draw,
+                    rg.Loss,
+                    rg.AvgDecisionTimes.Average(),
+                    rg.Language.PadRight(10));
+            }
+
+            sb.AppendFormat("+----------------------+------------------------------------------+" +
+                "------------+-------+-------+-------+-------+----------------+");
+
+            return sb.ToString();
         }
 
         private static void BuildWhereRequired(List<Player> players)
@@ -150,29 +238,37 @@ namespace BigBang.Orchestrator
 
         }
 
-        public static Result Play(Player p1, Player p2)
+        public static Result Play(Player p1, Player p2, StreamWriter sw)
         {
             var dir = PlayerDirectory;
 
             var result = new Result() { P1 = p1, P2 = p2, P1Score = 0, P2Score = 0 };
             var player1ParamList = string.Empty;
             var player2ParamList = string.Empty;
-            Process proc = new Process();
-            proc.StartInfo.UseShellExecute = false;
-            proc.StartInfo.RedirectStandardOutput = true;
-            proc.StartInfo.WorkingDirectory = dir;
-            
             var p1Times = new List<long>();
             var p2Times = new List<long>();
+            var sw1 = new Stopwatch();
+            var sw2 = new Stopwatch();
+            var swGame = new Stopwatch();
+            var sb = new StringBuilder();
 
-            Stopwatch sw1 = new Stopwatch();
-            Stopwatch sw2 = new Stopwatch();
+            var proc = new Process
+            {
+                StartInfo =
+                {
+                    UseShellExecute = false, RedirectStandardOutput = true, WorkingDirectory = dir
+                }
+            };
 
+            swGame.Start();
+            sb.AppendLine("+--------------------------------------------------------------------------------------------+");
+            sb.AppendFormat("| Starting Game between {0} & {1} \n", p1.Name, p2.Name);
+            sb.AppendLine("| ");
             for (var i = 0; i < 100; i++)
             {
                 sw1.Reset();
                 sw1.Start();
-                var o1 = RunProcess(ref proc, player1ParamList, player2ParamList, p1, dir);
+                var o1 = RunProcess(ref proc, player1ParamList, player2ParamList, p1, dir, sw);
                 sw1.Stop();
                 p1Times.Add(sw1.ElapsedMilliseconds);
 
@@ -180,7 +276,7 @@ namespace BigBang.Orchestrator
 
                 sw2.Reset();
                 sw2.Start();
-                var o2 = RunProcess(ref proc, player1ParamList, player2ParamList, p2, dir);
+                var o2 = RunProcess(ref proc, player1ParamList, player2ParamList, p2, dir, sw);
                 sw2.Stop();
                 p2Times.Add(sw2.ElapsedMilliseconds);
 
@@ -188,16 +284,25 @@ namespace BigBang.Orchestrator
                 player2ParamList += o2;
 
                 var whoWon = GetWinner(o1, o2);
-
+                var whoWonMessage = "Draw Match";
                 if (whoWon == "P1")
                 {
                     result.P1Score++;
+                    whoWonMessage = string.Format("{0} wins", p1.Name);
                 }
                 else if (whoWon == "P2")
                 {
                     result.P2Score++;
+                    whoWonMessage = string.Format("{0} wins", p2.Name);
                 }
+
+                sb.AppendFormat("| {0} plays {1} | {2} plays {3} | {4}\n", p1.Name, o1, p2.Name, o2, whoWonMessage);
+
             }
+            swGame.Stop();
+            sb.AppendLine("| ");
+            sb.AppendFormat("| Game Time: {0}", swGame.Elapsed);
+            sw.WriteLine(sb.ToString());
 
             result.P1AvgTimeMs = p1Times.Average();
             result.P2AvgTimeMs = p2Times.Average();
@@ -205,27 +310,27 @@ namespace BigBang.Orchestrator
             return result;
         }
 
-        public static string RunProcess(ref Process p, string player1ParamList, string player2ParamList, Player pl, string dir)
+        public static string RunProcess(ref Process p, string player1ParamList, string player2ParamList, Player pl, string dir, StreamWriter sw)
         {
-
+            
             if (!string.IsNullOrEmpty(pl.PrefixCommand))
             {
-                var exec = "\"" + dir + "\\" + pl.BotExecutable + "\"";
+                var exec = string.Format("\"{0}\\{1}\"", dir, pl.BotExecutable);
                 p.StartInfo.FileName = pl.PrefixCommand;
 
                 if (!string.IsNullOrEmpty(pl.JavaArgs))
                 {
+                    var args = string.Format("-cp \"{0}\\{1}\" {2}", dir, pl.JavaArgs, pl.BotExecutable);
                     p.StartInfo.Arguments = string.IsNullOrEmpty(player1ParamList)
-                        ? "-cp \"" + dir + "\\" + pl.JavaArgs + "\"" + " " + pl.BotExecutable
-                        : "-cp \"" + dir + "\\" + pl.JavaArgs + "\"" + " " + pl.BotExecutable + " " + player1ParamList +
-                          " " + player2ParamList;
+                        ? args
+                        : string.Format("{0} {1} {2}", args, player1ParamList, player2ParamList);
                 }
                 else
                 {
 
                     p.StartInfo.Arguments = string.IsNullOrEmpty(player1ParamList)
                         ? exec
-                        : string.Join(" ", exec, player1ParamList, player2ParamList);
+                        : string.Format("{0} {1} {2}", exec, player1ParamList, player2ParamList);
 
                 }
             }
@@ -235,14 +340,17 @@ namespace BigBang.Orchestrator
                 p.StartInfo.FileName = exec;
                 p.StartInfo.Arguments = string.IsNullOrEmpty(player1ParamList)
                     ? string.Empty
-                    : string.Join(" ", player1ParamList, player2ParamList);
+                    : string.Format("{0} {1}", player1ParamList, player2ParamList);
             }
 
             p.Start();
             string output = p.StandardOutput.ReadToEnd().Trim();
+
             p.WaitForExit();
 
-            return output;
+            return output.Length > 1
+                ? output.Substring(0, 1)
+                : output;
         }
 
         public static string [] validAnswer  = { "R", "P", "S", "L", "V" };
@@ -312,6 +420,10 @@ namespace BigBang.Orchestrator
         public bool RequiresCompile { get; set; }
         public string Author { get; set; }
         public int LeagueScore { get; set; }
+        public int Wins { get; set; }
+        public int Loss { get; set; }
+        public int Draw { get; set; }
+        public string Language { get; set; }
         public List<double> AvgDecisionTimes { get; set; }
 
         public Player()
