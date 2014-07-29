@@ -6,7 +6,8 @@ my @num2text = ('R','V','P','L','S');
 @phist = map($text2num{$_},split(//,$phist));
 @ohist = map($text2num{$_},split(//,$ohist));
 
-for(0..~~@phist-3){$curloc=$_;
+$lowerlimit = 0;
+for($lowerlimit..~~@phist-3){$curloc=$_;
  $result = $ohist[$curloc+2];
  @moveset = ($ohist[$curloc],$ohist[$curloc+1],$phist[$curloc],$phist[$curloc+1]);
  for(0..3){$a=$_;
@@ -23,7 +24,7 @@ for(0..~~@phist-3){$curloc=$_;
 for(0..3){$a=$_;
  for(0..$a){$b=$_;
   for(0..4){$move=$_;
-   $curpred[$move] *= $predict[$a][$b][$recentmoves[$a]][$recentmoves[$b]][$move]/5+1;
+   $curpred[$move] *= $predict[$a][$b][$recentmoves[$a]][$recentmoves[$b]][$move]/3+1;
   }
  }
 }
@@ -40,11 +41,15 @@ for(0..4){
  }
 }
 @options=();
+$offset=0;
+if(($ohist[-1] - $phist[-1])%5 < 2 && ($ohist[-2] - $phist[-2])%5 < 2 && ($ohist[-3] - $phist[-3])%5 < 2){  #frequentist alert!
+ $offset=int(rand(3));
+}
 for(0..4){
  if($bestmove[$_] == $max){
-  push(@options,$num2text[$_]);
+  push(@options,$num2text[($_+$offset)%5]);
  }
 }
-$output = $options[int(rand(~~@options))];
+$outputb = $options[int(rand(~~@options))];
 
-print "$output"
+print "$outputb";

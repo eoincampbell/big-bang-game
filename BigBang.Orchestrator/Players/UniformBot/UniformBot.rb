@@ -12,7 +12,8 @@ if( ARGV != nil && ARGV[0] != nil )
 
   if( mine.length < 50 )
     if( mine.length.even? )
-      mine.values_at(* mine.each_index.select {|i| i.even?}).each {|x| c[x]+=1; if( c[x]>4 ) then c.delete(x) end}
+      mine.values_at(* mine.each_index.select {|i| i.even?}).each {|x| c[x]+=1}
+      @counts.keys.each {|x| if( c[x]>4 ) then c.delete(x) end}
     else
       mine[0..-1].each_index.select {|i| i.even?}.each {|x| if( mine[x]==mine[-1] ) then c.delete(mine[x+1]) end}
     end
@@ -23,7 +24,7 @@ if( ARGV != nil && ARGV[0] != nil )
       if( mine[i..i+1].join == mine[-2..-1].join ) then c[theirs[i+2]]+=1 end
     end
     bestCount = 0
-    @counters.keys.each {|x| @counters[x].each {|y| c2[y]+=c[x]}}
+    @counters.keys.each {|x| @counters[x].each {|y| c2[y]+=c[x];c2[x]+=c[x]*0.4}}
     @counters.keys.each {|x| if( c2[x] > bestCount ) then bestCount = c2[x] end}
     @counters.keys.each {|x| if( c2[x] == bestCount ) then choices.push( x ) end}
   end
