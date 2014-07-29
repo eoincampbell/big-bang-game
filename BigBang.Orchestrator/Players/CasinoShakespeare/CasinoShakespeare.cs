@@ -1,23 +1,23 @@
 ﻿using System;
+using System.Linq;
+using System.Net;
 
-public class SimpleRandomBot
+namespace CasinoShakespeare
 {
-    public static void Main(string[] args)
+    class CasinoShakespeare
     {
-        var s = new[] {"R", "P", "S", "L", "V"};
-
-        if (args.Length == 0)
+        private static void Main()
         {
-            Console.WriteLine("V"); //always start with spock
-            return;
+            try
+            {
+                char[] ar = {'R', 'P', 'S', 'L', 'V'};
+                var a = new WebClient().DownloadString("http://www.iheartquotes.com/api/v1/random").Select(char.ToUpperInvariant).FirstOrDefault(ar.Contains);
+                Console.WriteLine(a == default(char) ? 'S' : a);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("R");
+            }
         }
-
-        char[] myPreviousPlays = args[0].ToCharArray();
-        char[] oppPreviousPlays = args[1].ToCharArray();
-
-        Random r = new Random();
-        int next = r.Next(0, 5);
-
-        Console.WriteLine(s[next]);
     }
 }
