@@ -47,10 +47,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Players\DogeBotv2\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\GitGudBot\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Players\GitGudBot\GitGudBot.cobra">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Players\QBot\QBot.cobra">
+    <None Include="Players\IocainePowder\IocainePowder.rb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\EdwardScissorHands\EdwardScissorHands.rb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\Khaleesi\Khaleesi.rb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\DejaQ\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\DejaQ\DejaQ.cobra">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\QQ\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\QQ\QQ.cobra">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\Q\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\Q\Q.cobra">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\Analyst\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\SelfHatingBot\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\SelfLoathingBot\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\CasinoShakespeare\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\SmarterBot\Build.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Players\YAARBot\YAARBot.js">
@@ -99,7 +144,7 @@
     <None Include="Players\Deadpool\Deadpool.rb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Players\MarkovBot\MarkovBot.rb">
+    <None Include="Players\Markov\Markov.rb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Players\LizardsRule\Build.bat">
@@ -111,7 +156,7 @@
     <None Include="Players\Echo\Echo.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Players\SpockOrRockBot\SpockOrRockBot.php">
+    <None Include="Players\SpockOrRock\SpockOrRock.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Players\SmartBot\SmartBot.java">
@@ -138,16 +183,34 @@
     <None Include="Players\CounterPreferenceBot\CounterPreferenceBot.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Players\SelfLoathingBot\SelfLoathingBot.java">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\Analyst\Analyst.java">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\SelfHatingBot\SelfHatingBot.java">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\SmarterBot\SmarterBot.java">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\DogeBotv2\DogeBotv2.java">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Players\ToddlerProof\ToddlerProof.java">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Players\BoringBot\BoringBot.java">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Players\HuddleWolfHatesBigBangTheory\HuddleWolfHatesBigBangTheory.cs">
+    <None Include="Players\HuddleWolfTheConqueror\HuddleWolfTheConqueror.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Players\LizardsRule\LizardsRule.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\CasinoShakespeare\CasinoShakespeare.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Program.cs" />
@@ -179,7 +242,7 @@
     <None Include="Players\Echo\Build.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Players\HuddleWolfHatesBigBangTheory\Build.bat">
+    <None Include="Players\HuddleWolfTheConqueror\Build.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Players\SlowLizard\SlowLizard.rb">

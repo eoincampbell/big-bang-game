@@ -15,15 +15,21 @@ namespace BigBang.Orchestrator
         public static List<Player> players = new List<Player>(){
                    //.NET
                     new Player { Author = "EoinC", Language = ".NET", Name = "SimpleRandomBot", BotExecutable = @"SimpleRandomBot\SimpleRandomBot.exe", RequiresCompile = true},
-                    new Player { Author = "HuddleWolf", Language = ".NET", Name = "HuddleWolfHatesBigBangTheory", BotExecutable = @"HuddleWolfHatesBigBangTheory\HuddleWolfHatesBigBangTheory.exe", RequiresCompile = true},
+                    new Player { Author = "HuddleWolf", Language = ".NET", Name = "HuddleWolfTheConqueror", BotExecutable = @"HuddleWolfTheConqueror\HuddleWolfTheConqueror.exe", RequiresCompile = true},
                     new Player { Author = "ProgramFOX", Language = ".NET", Name = "Echo", BotExecutable = @"Echo\Echo.exe" , RequiresCompile = true},
                     new Player { Author = "Mikey Mouse", Language = ".NET", Name = "LizardsRule", BotExecutable = @"LizardsRule\LizardsRule.exe" , RequiresCompile = true},
+                    new Player { Author = "Daniel", Language = ".NET", Name = "CasinoShakespeare", BotExecutable = @"CasinoShakespeare\CasinoShakespeare.exe" , RequiresCompile = true},
                    
                     //JAVA
                     new Player { Author = "Stranjyr", Language = "Java", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
                     new Player { Author = "kaine", Language = "Java", Name = "BoringBot", JavaArgs = "BoringBot", BotExecutable = @"BoringBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe"},
                     new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmartBot", JavaArgs = "SmartBot", BotExecutable = @"SmartBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
                     new Player { Author = "Milo", Language = "Java", Name = "DogeBot", JavaArgs = "DogeBot", BotExecutable = @"DogeBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "JoshDM", Language = "Java", Name = "SelfLoathingBot", JavaArgs = "SelfLoathingBot", BotExecutable = @"SelfLoathingBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "JoshDM", Language = "Java", Name = "SelfHatingBot", JavaArgs = "SelfHatingBot", BotExecutable = @"SelfHatingBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Qwix", Language = "Java", Name = "Analyst", JavaArgs = "Analyst", BotExecutable = @"Analyst", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmarterBot", JavaArgs = "SmarterBot", BotExecutable = @"SmarterBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Milo", Language = "Java", Name = "DogeBotv2", JavaArgs = "DogeBotv2", BotExecutable = @"DogeBotv2", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
 
                     //Ruby
                     new Player { Author = "William Barbosa", Language = "Ruby", Name = "StarWarsFan", BotExecutable = @"StarWarsFan\StarWarsFan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
@@ -32,16 +38,19 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Martin Büttner", Language = "Ruby", Name = "FairBot", BotExecutable = @"FairBot\FairBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Martin Büttner", Language = "Ruby", Name = "Vulcan", BotExecutable = @"Vulcan\Vulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Thaylon", Language = "Ruby", Name = "NitPicker", BotExecutable = @"NitPicker\NitPicker.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "MarkovBot", BotExecutable = @"MarkovBot\MarkovBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-//// BROKEN         new Player { Author = "histocrat", Language = "Ruby", Name = "Analogizer", BotExecutable = @"Analogizer\Analogizer.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Martin Büttner", Language = "Ruby", Name = "Markov", BotExecutable = @"Markov\Markov.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "histocrat", Language = "Ruby", Name = "Analogizer", BotExecutable = @"Analogizer\Analogizer.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
 //// BROKEN         new Player { Author = "Rory O'Kane", Language = "Ruby", Name = "RandomlyWeighted", BotExecutable = @"RandomlyWeighted\RandomlyWeighted.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "WereVulcan", BotExecutable = @"WereVulcan\WereVulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "BartBot", BotExecutable = @"BartBot\BartBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "LoopholeAbuser", BotExecutable = @"LoopholeAbuser\LoopholeAbuser.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "Alternator", BotExecutable = @"Alternator\Alternator.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-//// BROKEN         new Player { Author = "Thaylon", Language = "Ruby", Name = "UniformBot", BotExecutable = @"UniformBot\UniformBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Thaylon", Language = "Ruby", Name = "UniformBot", BotExecutable = @"UniformBot\UniformBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "BartSimpson", BotExecutable = @"BartSimpson\BartSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "LisaSimpson", BotExecutable = @"LisaSimpson\LisaSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "jmite", Language = "Ruby", Name = "IocainePowder", BotExecutable = @"IocainePowder\IocainePowder.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "Khaleesi", BotExecutable = @"Khaleesi\Khaleesi.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "EdwardScissorHands", BotExecutable = @"EdwardScissorHands\EdwardScissorHands.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     
                     //PYTHON 3
                     new Player { Author = "Timmy", Language = "Python3", Name = "DynamicBot", BotExecutable = @"DynamicBot\DynamicBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
@@ -60,7 +69,7 @@ namespace BigBang.Orchestrator
                     new Player { Author = "William Barbosa", Language = "Lua", Name = "BarneyStinson", BotExecutable = @"BarneyStinson\BarneyStinson.lua", PrefixCommand = @"C:\Program Files (x86)\Lua\5.1\lua.exe"},
 
                     //PHP
-                    new Player { Author = "ArcticanAudio", Language = "PHP", Name = "SpockOrRockBot", BotExecutable = @"SpockOrRockBot\SpockOrRockBot.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
+                    new Player { Author = "ArcticanAudio", Language = "PHP", Name = "SpockOrRock", BotExecutable = @"SpockOrRock\SpockOrRock.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
 //// BROKEN         new Player { Author = "Hikata Ikaruga", Language = "PHP", Name = "CounterPreferenceBot", BotExecutable = @"CounterPreferenceBot\CounterPreferenceBot.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
 
                     //PERL
@@ -77,8 +86,10 @@ namespace BigBang.Orchestrator
                     new Player { Author = "mccannf", Language = "JS", Name = "YAARBot", BotExecutable = @"YAARBot\YAARBot.js", PrefixCommand = @"C:\Chocolatey\lib\nodejs.commandline.0.10.29\tools\node.exe"},                    
 
                     //Cobra
-                    new Player { Author = "Ourous", Language = "Cobra", Name = "QBot", BotExecutable = @"QBot\QBot.exe"},                    
-                    new Player { Author = "Ourous", Language = "Cobra", Name = "GitGudBot", BotExecutable = @"GitGudBot\GitGudBot.exe"},                    
+                    new Player { Author = "Ourous", Language = "Cobra", Name = "Q", BotExecutable = @"Q\Q.exe", RequiresCompile = true},                    
+                    new Player { Author = "Ourous", Language = "Cobra", Name = "QQ", BotExecutable = @"QQ\QQ.exe",RequiresCompile = true},                  
+                    new Player { Author = "Ourous", Language = "Cobra", Name = "DejaQ", BotExecutable = @"DejaQ\DejaQ.exe",RequiresCompile = true},                    
+                    new Player { Author = "Ourous", Language = "Cobra", Name = "GitGudBot", BotExecutable = @"GitGudBot\GitGudBot.exe",RequiresCompile = true},                    
 
 
                 };
@@ -172,6 +183,7 @@ namespace BigBang.Orchestrator
 
                 var printResults = PrintResultGrid(resultGrid);
                 sw.WriteLine(printResults);
+                sw.WriteLine("Total Players: {0}", players.Count);
                 sw.WriteLine("Total Matches Completed: {0}", matches.Count);
                 sw.WriteLine("Total Tourney Time: {0}", tourneyTimer.Elapsed);
 
@@ -264,7 +276,7 @@ namespace BigBang.Orchestrator
             sb.AppendLine("+--------------------------------------------------------------------------------------------+");
             sb.AppendFormat("| Starting Game between {0} & {1} \n", p1.Name, p2.Name);
             sb.AppendLine("| ");
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 1; i++)
             {
                 sw1.Reset();
                 sw1.Start();
@@ -272,11 +284,11 @@ namespace BigBang.Orchestrator
                 sw1.Stop();
                 p1Times.Add(sw1.ElapsedMilliseconds);
 
-                System.Threading.Thread.Sleep(1);
+                //System.Threading.Thread.Sleep(1);
 
                 sw2.Reset();
                 sw2.Start();
-                var o2 = RunProcess(ref proc, player1ParamList, player2ParamList, p2, dir, sw);
+                var o2 = RunProcess(ref proc, player2ParamList, player1ParamList, p2, dir, sw);
                 sw2.Stop();
                 p2Times.Add(sw2.ElapsedMilliseconds);
 
