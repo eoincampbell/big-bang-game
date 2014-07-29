@@ -1,0 +1,55 @@
+@number float
+class Bot
+    def main
+        index = {c'R':0,c'P':1,c'S':2,c'L':3,c'V':4}
+        win = @[@[2,3],@[0,4],@[1,3],@[1,4],@[0,2]]
+        lose = @[@[1,4],@[2,3],@[0,4],@[0,2],@[1,3]]
+        args = CobraCore.commandLineArgs
+        rng = Random()
+        if args.count <> 3
+            Console.write('RPSLV'[rng.next(5)])
+        else if args[2].length < 2
+            Console.write('RPSLV'[lose[index[args[2][0]]][rng.next(2)]])
+            options = List<of float>(float[](5))
+        else
+            this_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
+            this_frequency = List<of uint64>(uint64[](5))
+            old_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
+            old_frequency = List<of uint64>(uint64[](5)) 
+            if args[1].length > 10
+                for num, move in args[1][:args[1].length-11].numbered
+                    old_history[index[move]][index[args[2][num+1]]] += 1
+                    old_frequency[index[args[2][num+1]]] += 1
+                for num, move in args[1][args[1].length-11:-1].numbered
+                    this_history[index[move]][index[args[2][num+1]]] += 1
+                    this_frequency[index[args[2][num+1]]] += 1
+            else
+                for num, move in args[1][:-1].numbered
+                    this_history[index[move]][index[args[2][num+1]]] += 1
+                    this_frequency[index[args[2][num+1]]] += 1
+            me_last = index[args[1][args[1].length-1]]
+            them_last = index[args[2][args[2].length-1]]
+            turns = args[1].length
+            options = List<of float>(float[](5))
+            for n in 5
+                this_rchan = this_history[me_last][n]/if(.sum(this_history[me_last]),.sum(this_history[me_last]),1)
+                this_rcert = this_history[me_last][n]/(if(this_frequency[me_last],this_frequency[me_last],1)/5f)
+                this_weight = this_rchan*this_rcert*2
+                old_rchan = old_history[me_last][n]/if(.sum(old_history[me_last]),.sum(old_history[me_last]),1)
+                old_rcert = old_history[me_last][n]/(if(old_frequency[me_last],old_frequency[me_last],1)/5f)
+                old_weight = old_rchan*old_rcert    
+                for m in win[n]
+                    options[m] -= this_weight*2 + old_weight*2
+                options[n] -= this_weight + old_weight
+                for m in lose[n]
+                    options[m] += this_weight*2 + old_weight*2
+            temp_selection = List<of int>()
+            for num, o in options.numbered
+                if o == options.sorted.last
+                    temp_selection.add(num)
+            Console.write('RPSLV'[temp_selection[rng.next(temp_selection.count)]])
+
+    def sum(list as List<of uint64>) as uint64
+        num = 0u64
+        for entry in list, num += entry
+        return num
