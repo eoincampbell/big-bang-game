@@ -12,6 +12,8 @@ namespace BigBang.Orchestrator
 
     public class Program
     {
+        
+        
         public static List<Player> players = new List<Player>(){
                    //.NET
                     new Player { Author = "EoinC", Language = ".NET", Name = "SimpleRandomBot", BotExecutable = @"SimpleRandomBot\SimpleRandomBot.exe", RequiresCompile = true},
@@ -94,7 +96,7 @@ namespace BigBang.Orchestrator
 
 
                 };
-
+        
 
         public static string AppDirectory
         {
@@ -199,6 +201,9 @@ namespace BigBang.Orchestrator
                 Console.WriteLine(printResults);
             }
 
+            var logdir = Path.GetFullPath(@"..\..\..\tourneys\");
+            File.Copy("Tournament.log",
+                Path.Combine(logdir, string.Format("Tournament-{0:yyyy-MM-dd-HH-mm-ss}.txt", DateTime.Now)));
             Console.WriteLine("Done!");
             Console.ReadLine();
         }
@@ -303,10 +308,8 @@ namespace BigBang.Orchestrator
                 sw2.Stop();
                 p2Times.Add(sw2.ElapsedMilliseconds);
 
-                player1ParamList += o1;
-                player2ParamList += o2;
 
-                var whoWon = GetWinner(o1, o2);
+                var whoWon = GetWinner(o1, o2, ref player1ParamList, ref player2ParamList);
                 var whoWonMessage = "Draw Match";
                 if (whoWon == "P1")
                 {
@@ -407,15 +410,23 @@ namespace BigBang.Orchestrator
                                 , new Tuple<string, string, string>("V", "V", "DRAW")
 
                             };
-        public static string GetWinner(string r1, string r2)
+        public static string GetWinner(string r1, string r2, ref string player1ParamList, ref string player2ParamList)
         {
-
             bool r1IsValid = validAnswer.Contains(r1);
             bool r2IsValid = validAnswer.Contains(r2);
 
-            if (!r1IsValid && !r2IsValid) return "DRAW";
-            if (!r1IsValid) return "P2";
-            if (!r2IsValid) return "P1";
+            if (!r1IsValid && !r2IsValid)
+                return "DRAW";
+            
+            if (!r1IsValid)
+                return "P2";
+            
+            if (!r2IsValid)
+                return "P1";
+
+
+            player1ParamList += r1;
+            player2ParamList += r2;
 
             var winner = WinMatrix.FirstOrDefault(q => q.Item1 == r1 && q.Item2 == r2);
             if (winner != null) return winner.Item3;
