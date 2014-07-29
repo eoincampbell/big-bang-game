@@ -64,6 +64,7 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Emil", Language = "Python2", Name = "Pony", BotExecutable = @"Pony\Pony.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "Claudiu", Language = "Python2", Name = "SuperMarkov", BotExecutable = @"SuperMarkov\SuperMarkov.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "cipher", Language = "Python2", Name = "LemmingBot", BotExecutable = @"LemmingBot\LemmingBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "Docopoper", Language = "Python2", Name = "RoboticOboeBotOboeTuner", BotExecutable = @"RoboticOboeBotOboeTuner\RoboticOboeBotOboeTuner.py", PrefixCommand = @"C:\Python27\python.exe"},                    
 
                     //LUA
                     new Player { Author = "William Barbosa", Language = "Lua", Name = "BarneyStinson", BotExecutable = @"BarneyStinson\BarneyStinson.lua", PrefixCommand = @"C:\Program Files (x86)\Lua\5.1\lua.exe"},
@@ -177,7 +178,15 @@ namespace BigBang.Orchestrator
                 }
 
 
-                var resultGrid = players.OrderByDescending(p => p.LeagueScore);
+                var resultGrid = players
+                    .OrderByDescending(p => p.LeagueScore)
+                    .Select((v, i) =>
+                    {
+                        v.Position = Humanizer.OrdinalizeExtensions.Ordinalize(players.Count(x => x.LeagueScore > v.LeagueScore) + 1);
+                        return v;
+                    });
+
+
                 tourneyTimer.Stop();
                 
 
@@ -198,7 +207,7 @@ namespace BigBang.Orchestrator
         {
             var sb = new StringBuilder();
 
-            sb.AppendFormat("| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |\n",
+            sb.AppendFormat("| {8} | {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |\n",
                 "Author".PadRight(20),
                 "Name".PadRight(40),
                 "Language".PadRight(10),
@@ -206,14 +215,15 @@ namespace BigBang.Orchestrator
                 "Win".PadRight(5),
                 "Draw".PadRight(5),
                 "Loss".PadRight(5),
-                "Avg. Dec. Time".PadRight(10));
+                "Avg. Dec. Time".PadRight(10),
+                "Pos #".PadRight(5));
 
-            sb.AppendLine("+----------------------+------------------------------------------+" +
+            sb.AppendLine("+-------+----------------------+------------------------------------------+" +
                 "------------+-------+-------+-------+-------+----------------+");
             
             foreach (var rg in resultGrid)
             {
-                sb.AppendFormat("| {0} | {1} | {7} | {2:000}   | {3:000}   | {4:000}   | {5:000}   | {6:0000.00} ms     |\n",
+                sb.AppendFormat("| {8} | {0} | {1} | {7} | {2:000}   | {3:000}   | {4:000}   | {5:000}   | {6:0000.00} ms     |\n",
                     rg.Author.PadRight(20),
                     rg.Name.PadRight(40),
                     rg.LeagueScore,
@@ -221,10 +231,11 @@ namespace BigBang.Orchestrator
                     rg.Draw,
                     rg.Loss,
                     rg.AvgDecisionTimes.Average(),
-                    rg.Language.PadRight(10));
+                    rg.Language.PadRight(10),
+                    rg.Position.PadRight(5));
             }
 
-            sb.AppendFormat("+----------------------+------------------------------------------+" +
+            sb.AppendFormat("+-------+----------------------+------------------------------------------+" +
                 "------------+-------+-------+-------+-------+----------------+");
 
             return sb.ToString();
@@ -276,7 +287,7 @@ namespace BigBang.Orchestrator
             sb.AppendLine("+--------------------------------------------------------------------------------------------+");
             sb.AppendFormat("| Starting Game between {0} & {1} \n", p1.Name, p2.Name);
             sb.AppendLine("| ");
-            for (var i = 0; i < 1; i++)
+            for (var i = 0; i < 100; i++)
             {
                 sw1.Reset();
                 sw1.Start();
@@ -435,6 +446,7 @@ namespace BigBang.Orchestrator
         public int Wins { get; set; }
         public int Loss { get; set; }
         public int Draw { get; set; }
+        public string Position { get; set; }
         public string Language { get; set; }
         public List<double> AvgDecisionTimes { get; set; }
 
