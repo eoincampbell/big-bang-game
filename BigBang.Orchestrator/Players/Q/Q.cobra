@@ -17,10 +17,8 @@ class Bot
                     past_history[num][n] = uint64.parse(line.split[n])
                     past_frequency[n] += uint64.parse(line.split[n])
         else, new_game = true
-        this_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
-        this_frequency = List<of uint64>(uint64[](5))
         if new_game, Console.write('RPSLV'[rng.next(5)])
-        else if args.count <> 3
+        else if args.count <> 3 or if(args.count<>3,false,args[2].length<2)
             options = List<of float>(float[](5))
             for n in 5
                 all_weight = past_frequency[n]/if(.sum(past_frequency),.sum(past_frequency),1)
@@ -35,10 +33,21 @@ class Bot
                     temp_selection.add(num)
             Console.write('RPSLV'[temp_selection[rng.next(temp_selection.count)]])
         else
-            for num, move in args[1].numbered
-                this_history[index[move]][index[args[2][num]]] += 1
-                this_frequency[index[move]] += 1
-                this_frequency[index[args[2][num]]] += 1
+            this_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
+            this_frequency = List<of uint64>(uint64[](5))
+            old_history = [List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5)),List<of uint64>(uint64[](5))]
+            old_frequency = List<of uint64>(uint64[](5)) 
+            if args[1].length > 10
+                for num, move in args[1][:args[1].length-11].numbered
+                    old_history[index[move]][index[args[2][num+1]]] += 1
+                    old_frequency[index[args[2][num+1]]] += 1
+                for num, move in args[1][args[1].length-11:-1].numbered
+                    this_history[index[move]][index[args[2][num+1]]] += 1
+                    this_frequency[index[args[2][num+1]]] += 1
+            else
+                for num, move in args[1][:-1].numbered
+                    this_history[index[move]][index[args[2][num+1]]] += 1
+                    this_frequency[index[args[2][num+1]]] += 1
             me_last = index[args[1][args[1].length-1]]
             them_last = index[args[2][args[2].length-1]]
             turns = args[1].length
@@ -46,21 +55,24 @@ class Bot
             for n in 5
                 this_rchan = this_history[me_last][n]/if(.sum(this_history[me_last]),.sum(this_history[me_last]),1)
                 this_rcert = this_history[me_last][n]/(if(this_frequency[me_last],this_frequency[me_last],1)/5f)
-                this_weight = this_rchan*this_rcert*turns/10
+                this_weight = (this_rchan*this_rcert)*if(turns>10,2f,turns/5)
+                old_rchan = old_history[me_last][n]/if(.sum(old_history[me_last]),.sum(old_history[me_last]),1)
+                old_rcert = old_history[me_last][n]/(if(old_frequency[me_last],old_frequency[me_last],1)/5f)
+                old_weight = (old_rchan*old_rcert)/if(20-turns>0,20-turns,1)
                 all_rchan = past_history[me_last][n]/if(.sum(past_history[me_last]),.sum(past_history[me_last]),1)
                 all_rcert = past_history[me_last][n]/(if(past_frequency[me_last],past_frequency[me_last],1)/5f)
-                all_weight = all_rchan*all_rcert
+                all_weight = (all_rchan*all_rcert)/(Math.log(turns)/1.5f)
                 for m in win[n]
-                    options[m] -= this_weight*2 + all_weight*2
-                options[n] -= this_weight + all_weight
+                    options[m] -= this_weight*2 + old_weight*2 + all_weight*2
+                options[n] -= this_weight + old_weight + all_weight
                 for m in lose[n]
-                    options[m] += this_weight*2 + all_weight*2
+                    options[m] += this_weight*2 + old_weight*2 + all_weight*2
             temp_selection = List<of int>()
             for num, o in options.numbered
                 if o == options.sorted.last
                     temp_selection.add(num)
             Console.write('RPSLV'[temp_selection[rng.next(temp_selection.count)]])
-            past_history[me_last][them_last] += 1
+            past_history[index[args[1][args[1].length-2]]][them_last] += 1
 
         # write the history file
         record = List<of String>()
