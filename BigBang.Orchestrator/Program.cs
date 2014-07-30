@@ -121,7 +121,7 @@ namespace BigBang.Orchestrator
 
                 foreach (var match in matches)
                 {
-                    var result = Play(match, sw);
+                    var result = Play(match);
                     results.Add(result);
                 }
 
@@ -150,6 +150,8 @@ namespace BigBang.Orchestrator
 
                     p1.AvgDecisionTimes.Add(r.P1AvgTimeMs);
                     p2.AvgDecisionTimes.Add(r.P2AvgTimeMs);
+
+                    sw.Write(r.GetLogOuput());
                 }
 
 
@@ -239,7 +241,7 @@ namespace BigBang.Orchestrator
 
         }
 
-        private static Result Play(IList<Player> match, StreamWriter sw)
+        private static Result Play(IList<Player> match)
         {
             Player p1 = null, p2 = null;
             try
@@ -251,7 +253,7 @@ namespace BigBang.Orchestrator
                 p1 = match[0];
                 p2 = match[1];
 
-                var result = Play(p1, p2, sw);
+                var result = Play(p1, p2);
 
                 var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
                     result.P1,
@@ -259,8 +261,8 @@ namespace BigBang.Orchestrator
                     result.P1Score,
                     result.P2Score);
 
-                sw.WriteLine("| ");
-                sw.WriteLine("| {0}", resultMessage);
+                result.WriteLine("| ");
+                result.WriteLine("| {0}", resultMessage);
 
                 Console.WriteLine(resultMessage);
 
@@ -274,7 +276,7 @@ namespace BigBang.Orchestrator
             }
         }
 
-        public static Result Play(Player p1, Player p2, StreamWriter sw)
+        public static Result Play(Player p1, Player p2)
         {
             var dir = PlayerDirectory;
 
@@ -304,7 +306,7 @@ namespace BigBang.Orchestrator
             {
                 sw1.Reset();
                 sw1.Start();
-                var o1 = RunProcess(ref proc, player1ParamList, player2ParamList, p1, dir, sw);
+                var o1 = RunProcess(ref proc, player1ParamList, player2ParamList, p1, dir);
                 sw1.Stop();
                 p1Times.Add(sw1.ElapsedMilliseconds);
 
@@ -312,7 +314,7 @@ namespace BigBang.Orchestrator
 
                 sw2.Reset();
                 sw2.Start();
-                var o2 = RunProcess(ref proc, player2ParamList, player1ParamList, p2, dir, sw);
+                var o2 = RunProcess(ref proc, player2ParamList, player1ParamList, p2, dir);
                 sw2.Stop();
                 p2Times.Add(sw2.ElapsedMilliseconds);
 
@@ -336,7 +338,7 @@ namespace BigBang.Orchestrator
             swGame.Stop();
             sb.AppendLine("| ");
             sb.AppendFormat("| Game Time: {0}", swGame.Elapsed);
-            sw.WriteLine(sb.ToString());
+            result.WriteLine(sb.ToString());
 
             result.P1AvgTimeMs = p1Times.Average();
             result.P2AvgTimeMs = p2Times.Average();
@@ -344,7 +346,7 @@ namespace BigBang.Orchestrator
             return result;
         }
 
-        public static string RunProcess(ref Process p, string player1ParamList, string player2ParamList, Player pl, string dir, StreamWriter sw)
+        public static string RunProcess(ref Process p, string player1ParamList, string player2ParamList, Player pl, string dir)
         {
             
             if (!string.IsNullOrEmpty(pl.PrefixCommand))
@@ -453,6 +455,23 @@ namespace BigBang.Orchestrator
         public double P2AvgTimeMs { get; set; }
 
         public Exception Exception { get; set; }
+
+        private StringWriter _sw = new StringWriter();
+
+        public void WriteLine(string formatString, params string[] args)
+        {
+            _sw.WriteLine(formatString, args);
+        }
+
+        public string GetLogOuput()
+        {
+            if (Exception != null)
+            {
+                _sw.WriteLine(Exception);
+            }
+
+            return _sw.ToString();
+        }
     }
 
     public class Player
