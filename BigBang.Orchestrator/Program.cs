@@ -22,7 +22,7 @@ namespace BigBang.Orchestrator
                     new Player { Author = "ProgramFOX", Language = ".NET", Name = "Echo", BotExecutable = @"Echo\Echo.exe" , RequiresCompile = true},
                     new Player { Author = "Mikey Mouse", Language = ".NET", Name = "LizardsRule", BotExecutable = @"LizardsRule\LizardsRule.exe" , RequiresCompile = true},
                     new Player { Author = "Daniel", Language = ".NET", Name = "CasinoShakespeare", BotExecutable = @"CasinoShakespeare\CasinoShakespeare.exe" , RequiresCompile = true},
-                   
+                  
                     //JAVA
                     new Player { Author = "Stranjyr", Language = "Java", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
                     new Player { Author = "kaine", Language = "Java", Name = "BoringBot", JavaArgs = "BoringBot", BotExecutable = @"BoringBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe"},
@@ -54,7 +54,7 @@ namespace BigBang.Orchestrator
                     new Player { Author = "jmite", Language = "Ruby", Name = "IocainePowder", BotExecutable = @"IocainePowder\IocainePowder.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "Khaleesi", BotExecutable = @"Khaleesi\Khaleesi.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "EdwardScissorHands", BotExecutable = @"EdwardScissorHands\EdwardScissorHands.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    
+  /*                   
                     //PYTHON 3
                     new Player { Author = "Timmy", Language = "Python3", Name = "DynamicBot", BotExecutable = @"DynamicBot\DynamicBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
                     new Player { Author = "Kyle Kanos", Language = "Python3", Name = "ViolentBot", BotExecutable = @"ViolentBot\ViolentBot.py", PrefixCommand = @"C:\Python34\python.exe"},                    
@@ -94,7 +94,7 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Ourous", Language = "Cobra", Name = "QQ", BotExecutable = @"QQ\QQ.exe",RequiresCompile = true},                  
                     new Player { Author = "Ourous", Language = "Cobra", Name = "DejaQ", BotExecutable = @"DejaQ\DejaQ.exe",RequiresCompile = true},                    
                     new Player { Author = "Ourous", Language = "Cobra", Name = "GitGudBot", BotExecutable = @"GitGudBot\GitGudBot.exe",RequiresCompile = true},                    
-
+ */
 
                 };
         
@@ -109,9 +109,11 @@ namespace BigBang.Orchestrator
             get { return Path.GetDirectoryName(AppDirectory) + "\\Players"; }
         }
 
+        private static object outsideLock = new object();
+
         static void Main(string[] args)
         {
-            using (StreamWriter sw = new StreamWriter("Tournament.log", false))
+            using (var sw = new StreamWriter("Tournament.log", false))
             {
                 // BuildWhereRequired(players);
                 var tourneyTimer = new Stopwatch();
@@ -125,8 +127,27 @@ namespace BigBang.Orchestrator
                                                     .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
                                                     .WithMergeOptions(ParallelMergeOptions.FullyBuffered);
 
-                var results = parallelMatches.Select(match => Play(match))
-                                             .ToList();
+                var outsideCounter = 0;
+                var outsideCounterb = 0;
+                
+                var results = parallelMatches
+                                .Select(match =>
+                                {
+                                    lock (outsideLock)
+                                    {
+                                        outsideCounter++;
+                                    }
+                                    Console.WriteLine("outsideCounter: " + outsideCounter);
+                                    var result = Play(match);
+                                    lock (outsideLock)
+                                    {
+                                        outsideCounterb++;
+                                    }
+                                    match.CompleteMatch();
+                                    Console.WriteLine("outsideCounterb: " + outsideCounterb);
+                                    return result;
+                                })
+                                .ToList();
 
                 foreach (var r in results)
                 {
@@ -247,37 +268,39 @@ namespace BigBang.Orchestrator
         private static Result Play(Match match)
         {
             using (match)
-            try
             {
-                Player p1 = match.P1,
-                       p2 = match.P2;
-
-                if (p1 == null || p2 == null)
+                try
                 {
-                    throw new ApplicationException("One or more players didn't show!");
+                    Player p1 = match.P1,
+                        p2 = match.P2;
+
+                    if (p1 == null || p2 == null)
+                    {
+                        throw new ApplicationException("One or more players didn't show!");
+                    }
+
+                    //Console.WriteLine("Starting: {0} vs {1}", p1, p2);
+
+                    var result = Play(p1, p2);
+
+                    var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
+                        result.P1,
+                        result.P2,
+                        result.P1Score,
+                        result.P2Score);
+
+                    result.WriteLine("| ");
+                    result.WriteLine("| {0}", resultMessage);
+
+                   // Console.WriteLine(resultMessage);
+
+                    return result;
                 }
-
-                Console.WriteLine("Starting: {0} vs {1}", p1, p2);
-
-                var result = Play(p1, p2);
-
-                var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
-                    result.P1,
-                    result.P2,
-                    result.P1Score,
-                    result.P2Score);
-
-                result.WriteLine("| ");
-                result.WriteLine("| {0}", resultMessage);
-
-                Console.WriteLine(resultMessage);
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return new Result { Exception = ex };
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    return new Result {Exception = ex};
+                }
             }
         }
 
@@ -307,7 +330,7 @@ namespace BigBang.Orchestrator
             sb.AppendLine("+--------------------------------------------------------------------------------------------+");
             sb.AppendFormat("| Starting Game between {0} & {1} \n", p1.Name, p2.Name);
             sb.AppendLine("| ");
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 1; i++)
             {
                 sw1.Reset();
                 sw1.Start();
@@ -529,9 +552,14 @@ namespace BigBang.Orchestrator
                    otherMatch.P2 == this.P2;
         }
 
-        public void Dispose()
+        public void CompleteMatch()
         {
             _generator.Complete(this);
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 
@@ -543,10 +571,13 @@ namespace BigBang.Orchestrator
     // we have to make sure a player is only playing one game at a time, otherwise they may have concurrency issues with their data directory
     public class MatchGenerator : IMatchCompleter
     {
+        private static object synclock = new object();
+        public int matchesCompleted = 0;
         // use this blocking collection as a message pump
         // the PLINQ threads executing a match will add id to this collection when completed
         // the generator function consumes completed matches, then
         private BlockingCollection<Match> _matchCompletionQueue = new BlockingCollection<Match>();
+        // private ConcurrentQueue<Match> _matchCompletionQueue = new ConcurrentQueue<Match>();
 
         public IEnumerable<Match> Generate(IList<Player> players)
         {
@@ -561,23 +592,37 @@ namespace BigBang.Orchestrator
             while (true)
             {
                 // find all matches where both players are available
+                
                 var nextMatches = new List<Match>();
-                for (var i = 0; i < matches.Count; ++i)
+
+                lock (matches)
                 {
-                    var match = matches[i];
-                    if (!(nextMatches.Any(m => m.ConflictsWith(match)) || currentMatches.Any(m => m.ConflictsWith(match))))
+                    lock (nextMatches)
                     {
-                        nextMatches.Add(match);
-                        matches.RemoveAt(i--);
+                        for (var i = 0; i < matches.Count; ++i)
+                        {
+                            var match = matches[i];
+                            if (
+                                !(nextMatches.Any(m => m.ConflictsWith(match)) ||
+                                  currentMatches.Any(m => m.ConflictsWith(match))))
+                            {
+                                nextMatches.Add(match);
+                                matches.RemoveAt(i--);
+                            }
+                        }
                     }
                 }
 
                 // dispatch these matches to be played
-                foreach (var match in nextMatches)
-                {
-                    yield return match;
-                    currentMatches.Add(match);
-                }
+                    foreach (var match in nextMatches)
+                    {
+                        yield return match;
+                        lock (currentMatches)
+                        {
+                            currentMatches.Add(match);
+                        }
+                    }
+                
 
                 // bail if there aren't any more matches to play (the generator doesn't need to wait for the current matches to finish)
                 if (matches.Count == 0)
@@ -586,14 +631,28 @@ namespace BigBang.Orchestrator
                 }
 
                 // wait for a match to complete before continuing
-                var matchThatJustFinished = _matchCompletionQueue.Take();
-                currentMatches.Remove(matchThatJustFinished);
+                Match matchThatJustFinished;
+                _matchCompletionQueue.TryTake(out matchThatJustFinished, 100);
+                if (matchThatJustFinished != null)
+                {
+                    currentMatches.Remove(matchThatJustFinished);
+                }
+                else
+                {
+                    Console.WriteLine("Try Get Match failed... spinning...");
+                }
             }
         }
 
         void IMatchCompleter.Complete(Match match)
         {
             _matchCompletionQueue.Add(match);
+            lock (synclock)
+            {
+                matchesCompleted++;
+            }
+
+            Console.WriteLine(matchesCompleted + " done!");
         }
     }
 }
