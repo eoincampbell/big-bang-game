@@ -121,35 +121,8 @@ namespace BigBang.Orchestrator
 
                 foreach (var match in matches)
                 {
-                    Player p1 = null, p2 = null;
-                    try
-                    {
-                        if (match[0] == null || match[1] == null)
-                        {
-                            throw new ApplicationException("One or more players didn't show!");
-                        }
-                        p1 = match[0];
-                        p2 = match[1];
-
-                        var result = Play(p1, p2, sw);
-                        results.Add(result);
-
-                        var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}", 
-                            result.P1, 
-                            result.P2, 
-                            result.P1Score,
-                            result.P2Score);
-
-                        sw.WriteLine("| ");
-                        sw.WriteLine("| {0}", resultMessage);
-
-                        Console.WriteLine(resultMessage);
-                    }
-
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
+                    var result = Play(match, sw);
+                    results.Add(result);
                 }
 
                 foreach (var r in results)
@@ -264,6 +237,41 @@ namespace BigBang.Orchestrator
                 }
             }
 
+        }
+
+        private static Result Play(IList<Player> match, StreamWriter sw)
+        {
+            Player p1 = null, p2 = null;
+            try
+            {
+                if (match[0] == null || match[1] == null)
+                {
+                    throw new ApplicationException("One or more players didn't show!");
+                }
+                p1 = match[0];
+                p2 = match[1];
+
+                var result = Play(p1, p2, sw);
+
+                var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
+                    result.P1,
+                    result.P2,
+                    result.P1Score,
+                    result.P2Score);
+
+                sw.WriteLine("| ");
+                sw.WriteLine("| {0}", resultMessage);
+
+                Console.WriteLine(resultMessage);
+
+                return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return new Result { Exception = ex };
+            }
         }
 
         public static Result Play(Player p1, Player p2, StreamWriter sw)
@@ -443,6 +451,8 @@ namespace BigBang.Orchestrator
         public int P2Score { get; set; }
         public double P1AvgTimeMs { get; set; }
         public double P2AvgTimeMs { get; set; }
+
+        public Exception Exception { get; set; }
     }
 
     public class Player
