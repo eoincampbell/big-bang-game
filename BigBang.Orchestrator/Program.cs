@@ -9,6 +9,7 @@ using Combinatorics.Collections;
 namespace BigBang.Orchestrator
 {
     using System.Diagnostics;
+    using System.Collections.Concurrent;
 
     public class Program
     {
@@ -115,42 +116,17 @@ namespace BigBang.Orchestrator
                 // BuildWhereRequired(players);
                 var tourneyTimer = new Stopwatch();
                 tourneyTimer.Start();
-                
-                var matches = new Combinations<Player>(players, 2, GenerateOption.WithoutRepetition);
-                var results = new List<Result>();
 
-                foreach (var match in matches)
-                {
-                    Player p1 = null, p2 = null;
-                    try
-                    {
-                        if (match[0] == null || match[1] == null)
-                        {
-                            throw new ApplicationException("One or more players didn't show!");
-                        }
-                        p1 = match[0];
-                        p2 = match[1];
+                var matchGenerator = new MatchGenerator();
 
-                        var result = Play(p1, p2, sw);
-                        results.Add(result);
+                var parallelMatches = matchGenerator.Generate(players)
+                                                    .AsParallel()
+                                                    .WithDegreeOfParallelism(Environment.ProcessorCount)
+                                                    .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+                                                    .WithMergeOptions(ParallelMergeOptions.FullyBuffered);
 
-                        var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}", 
-                            result.P1, 
-                            result.P2, 
-                            result.P1Score,
-                            result.P2Score);
-
-                        sw.WriteLine("| ");
-                        sw.WriteLine("| {0}", resultMessage);
-
-                        Console.WriteLine(resultMessage);
-                    }
-
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-                }
+                var results = parallelMatches.Select(match => Play(match))
+                                             .ToList();
 
                 foreach (var r in results)
                 {
@@ -177,6 +153,8 @@ namespace BigBang.Orchestrator
 
                     p1.AvgDecisionTimes.Add(r.P1AvgTimeMs);
                     p2.AvgDecisionTimes.Add(r.P2AvgTimeMs);
+
+                    sw.Write(r.GetLogOuput());
                 }
 
 
@@ -195,7 +173,7 @@ namespace BigBang.Orchestrator
                 var printResults = PrintResultGrid(resultGrid);
                 sw.WriteLine(printResults);
                 sw.WriteLine("Total Players: {0}", players.Count);
-                sw.WriteLine("Total Matches Completed: {0}", matches.Count);
+                sw.WriteLine("Total Matches Completed: {0}", results.Count);
                 sw.WriteLine("Total Tourney Time: {0}", tourneyTimer.Elapsed);
 
                 Console.WriteLine(printResults);
@@ -266,7 +244,44 @@ namespace BigBang.Orchestrator
 
         }
 
-        public static Result Play(Player p1, Player p2, StreamWriter sw)
+        private static Result Play(Match match)
+        {
+            using (match)
+            try
+            {
+                Player p1 = match.P1,
+                       p2 = match.P2;
+
+                if (p1 == null || p2 == null)
+                {
+                    throw new ApplicationException("One or more players didn't show!");
+                }
+
+                Console.WriteLine("Starting: {0} vs {1}", p1, p2);
+
+                var result = Play(p1, p2);
+
+                var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
+                    result.P1,
+                    result.P2,
+                    result.P1Score,
+                    result.P2Score);
+
+                result.WriteLine("| ");
+                result.WriteLine("| {0}", resultMessage);
+
+                Console.WriteLine(resultMessage);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return new Result { Exception = ex };
+            }
+        }
+
+        public static Result Play(Player p1, Player p2)
         {
             var dir = PlayerDirectory;
 
@@ -296,7 +311,7 @@ namespace BigBang.Orchestrator
             {
                 sw1.Reset();
                 sw1.Start();
-                var o1 = RunProcess(ref proc, player1ParamList, player2ParamList, p1, dir, sw);
+                var o1 = RunProcess(ref proc, player1ParamList, player2ParamList, p1, dir);
                 sw1.Stop();
                 p1Times.Add(sw1.ElapsedMilliseconds);
 
@@ -304,7 +319,7 @@ namespace BigBang.Orchestrator
 
                 sw2.Reset();
                 sw2.Start();
-                var o2 = RunProcess(ref proc, player2ParamList, player1ParamList, p2, dir, sw);
+                var o2 = RunProcess(ref proc, player2ParamList, player1ParamList, p2, dir);
                 sw2.Stop();
                 p2Times.Add(sw2.ElapsedMilliseconds);
 
@@ -328,7 +343,7 @@ namespace BigBang.Orchestrator
             swGame.Stop();
             sb.AppendLine("| ");
             sb.AppendFormat("| Game Time: {0}", swGame.Elapsed);
-            sw.WriteLine(sb.ToString());
+            result.WriteLine(sb.ToString());
 
             result.P1AvgTimeMs = p1Times.Average();
             result.P2AvgTimeMs = p2Times.Average();
@@ -336,7 +351,7 @@ namespace BigBang.Orchestrator
             return result;
         }
 
-        public static string RunProcess(ref Process p, string player1ParamList, string player2ParamList, Player pl, string dir, StreamWriter sw)
+        public static string RunProcess(ref Process p, string player1ParamList, string player2ParamList, Player pl, string dir)
         {
             
             if (!string.IsNullOrEmpty(pl.PrefixCommand))
@@ -443,6 +458,25 @@ namespace BigBang.Orchestrator
         public int P2Score { get; set; }
         public double P1AvgTimeMs { get; set; }
         public double P2AvgTimeMs { get; set; }
+
+        public Exception Exception { get; set; }
+
+        private StringWriter _sw = new StringWriter();
+
+        public void WriteLine(string formatString, params string[] args)
+        {
+            _sw.WriteLine(formatString, args);
+        }
+
+        public string GetLogOuput()
+        {
+            if (Exception != null)
+            {
+                _sw.WriteLine(Exception);
+            }
+
+            return _sw.ToString();
+        }
     }
 
     public class Player
@@ -470,6 +504,96 @@ namespace BigBang.Orchestrator
         public override string ToString()
         {
             return Name;
+        }
+    }
+
+    public class Match : IDisposable
+    {
+        private IMatchCompleter _generator;
+
+        public Match(IMatchCompleter generator, Player p1, Player p2)
+        {
+            _generator = generator;
+            P1 = p1;
+            P2 = p2;
+        }
+
+        public Player P1 { get; private set; }
+        public Player P2 { get; private set; }
+
+        public bool ConflictsWith(Match otherMatch)
+        {
+            return otherMatch.P1 == this.P1 ||
+                   otherMatch.P1 == this.P2 ||
+                   otherMatch.P2 == this.P1 ||
+                   otherMatch.P2 == this.P2;
+        }
+
+        public void Dispose()
+        {
+            _generator.Complete(this);
+        }
+    }
+
+    public interface IMatchCompleter
+    {
+        void Complete(Match match);
+    }
+
+    // we have to make sure a player is only playing one game at a time, otherwise they may have concurrency issues with their data directory
+    public class MatchGenerator : IMatchCompleter
+    {
+        // use this blocking collection as a message pump
+        // the PLINQ threads executing a match will add id to this collection when completed
+        // the generator function consumes completed matches, then
+        private BlockingCollection<Match> _matchCompletionQueue = new BlockingCollection<Match>();
+
+        public IEnumerable<Match> Generate(IList<Player> players)
+        {
+            // generate all combinations of players
+            var matches = new Combinations<Player>(players, 2, GenerateOption.WithoutRepetition)
+                            .Select(c => new Match(this, c[0], c[1]))
+                            .ToList();
+
+            // keep a list of ongoing matches
+            var currentMatches = new List<Match>();
+
+            while (true)
+            {
+                // find all matches where both players are available
+                var nextMatches = new List<Match>();
+                for (var i = 0; i < matches.Count; ++i)
+                {
+                    var match = matches[i];
+                    if (!(nextMatches.Any(m => m.ConflictsWith(match)) || currentMatches.Any(m => m.ConflictsWith(match))))
+                    {
+                        nextMatches.Add(match);
+                        matches.RemoveAt(i--);
+                    }
+                }
+
+                // dispatch these matches to be played
+                foreach (var match in nextMatches)
+                {
+                    yield return match;
+                    currentMatches.Add(match);
+                }
+
+                // bail if there aren't any more matches to play (the generator doesn't need to wait for the current matches to finish)
+                if (matches.Count == 0)
+                {
+                    break;
+                }
+
+                // wait for a match to complete before continuing
+                var matchThatJustFinished = _matchCompletionQueue.Take();
+                currentMatches.Remove(matchThatJustFinished);
+            }
+        }
+
+        void IMatchCompleter.Complete(Match match)
+        {
+            _matchCompletionQueue.Add(match);
         }
     }
 }
