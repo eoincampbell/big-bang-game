@@ -1,0 +1,748 @@
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & HuddleWolfTheConqueror 
+| 
+| SimpleRandomBot plays V | HuddleWolfTheConqueror plays S | SimpleRandomBot wins
+| 
+| Game Time: 00:00:00.0537883
+| 
+| Result: SimpleRandomBot vs HuddleWolfTheConqueror: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & LizardsRule 
+| 
+| HuddleWolfTheConqueror plays L | LizardsRule plays L | Draw Match
+| 
+| Game Time: 00:00:00.0487558
+| 
+| Result: HuddleWolfTheConqueror vs LizardsRule: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & Echo 
+| 
+| HuddleWolfTheConqueror plays R | Echo plays P | Echo wins
+| 
+| Game Time: 00:00:00.0500719
+| 
+| Result: HuddleWolfTheConqueror vs Echo: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & CasinoShakespeare 
+| 
+| SimpleRandomBot plays V | CasinoShakespeare plays V | Draw Match
+| 
+| Game Time: 00:00:00.0473151
+| 
+| Result: SimpleRandomBot vs CasinoShakespeare: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & Analyst 
+| 
+| CasinoShakespeare plays V | Analyst plays L | Analyst wins
+| 
+| Game Time: 00:00:00.1434029
+| 
+| Result: CasinoShakespeare vs Analyst: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & SmartBot 
+| 
+| SimpleRandomBot plays V | SmartBot plays L | SmartBot wins
+| 
+| Game Time: 00:00:00.1418858
+| 
+| Result: SimpleRandomBot vs SmartBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & Analyst 
+| 
+| Echo plays S | Analyst plays V | Analyst wins
+| 
+| Game Time: 00:00:00.1350651
+| 
+| Result: Echo vs Analyst: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & BoringBot 
+| 
+| HuddleWolfTheConqueror plays R | BoringBot plays P | BoringBot wins
+| 
+| Game Time: 00:00:00.1675432
+| 
+| Result: HuddleWolfTheConqueror vs BoringBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & BoringBot 
+| 
+| CasinoShakespeare plays V | BoringBot plays P | BoringBot wins
+| 
+| Game Time: 00:00:00.1288383
+| 
+| Result: CasinoShakespeare vs BoringBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & Analyst 
+| 
+| SimpleRandomBot plays V | Analyst plays V | Draw Match
+| 
+| Game Time: 00:00:00.1476764
+| 
+| Result: SimpleRandomBot vs Analyst: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & SmarterBot 
+| 
+| SimpleRandomBot plays V | SmarterBot plays L | SmarterBot wins
+| 
+| Game Time: 00:00:00.1078509
+| 
+| Result: SimpleRandomBot vs SmarterBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & SelfHatingBot 
+| 
+| BoringBot plays P | SelfHatingBot plays L | SelfHatingBot wins
+| 
+| Game Time: 00:00:00.1876581
+| 
+| Result: BoringBot vs SelfHatingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & SelfHatingBot 
+| 
+| ToddlerProof plays V | SelfHatingBot plays V | Draw Match
+| 
+| Game Time: 00:00:00.1561374
+| 
+| Result: ToddlerProof vs SelfHatingBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & SmarterBot 
+| 
+| LizardsRule plays L | SmarterBot plays L | Draw Match
+| 
+| Game Time: 00:00:00.0955139
+| 
+| Result: LizardsRule vs SmarterBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & DogeBot 
+| 
+| BoringBot plays P | DogeBot plays P | Draw Match
+| 
+| Game Time: 00:00:00.1488744
+| 
+| Result: BoringBot vs DogeBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfLoathingBot & SelfHatingBot 
+| 
+| SelfLoathingBot plays L | SelfHatingBot plays V | SelfLoathingBot wins
+| 
+| Game Time: 00:00:00.1482707
+| 
+| Result: SelfLoathingBot vs SelfHatingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Analyst & SmarterBot 
+| 
+| Analyst plays S | SmarterBot plays L | Analyst wins
+| 
+| Game Time: 00:00:00.1632982
+| 
+| Result: Analyst vs SmarterBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & ToddlerProof 
+| 
+| CasinoShakespeare plays V | ToddlerProof plays V | Draw Match
+| 
+| Game Time: 00:00:00.1367759
+| 
+| Result: CasinoShakespeare vs ToddlerProof: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & ToddlerProof 
+| 
+| Echo plays L | ToddlerProof plays V | Echo wins
+| 
+| Game Time: 00:00:00.1323891
+| 
+| Result: Echo vs ToddlerProof: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & ToddlerProof 
+| 
+| LizardsRule plays L | ToddlerProof plays V | LizardsRule wins
+| 
+| Game Time: 00:00:00.1585190
+| 
+| Result: LizardsRule vs ToddlerProof: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & Analyst 
+| 
+| LizardsRule plays L | Analyst plays L | Draw Match
+| 
+| Game Time: 00:00:00.1373212
+| 
+| Result: LizardsRule vs Analyst: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & SelfHatingBot 
+| 
+| HuddleWolfTheConqueror plays L | SelfHatingBot plays S | SelfHatingBot wins
+| 
+| Game Time: 00:00:00.1465674
+| 
+| Result: HuddleWolfTheConqueror vs SelfHatingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & SelfLoathingBot 
+| 
+| CasinoShakespeare plays V | SelfLoathingBot plays S | CasinoShakespeare wins
+| 
+| Game Time: 00:00:00.1542531
+| 
+| Result: CasinoShakespeare vs SelfLoathingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & DogeBot 
+| 
+| Echo plays P | DogeBot plays P | Draw Match
+| 
+| Game Time: 00:00:00.1502689
+| 
+| Result: Echo vs DogeBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & Analyst 
+| 
+| ToddlerProof plays V | Analyst plays R | ToddlerProof wins
+| 
+| Game Time: 00:00:00.1968815
+| 
+| Result: ToddlerProof vs Analyst: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & DogeBotv2 
+| 
+| SimpleRandomBot plays V | DogeBotv2 plays P | DogeBotv2 wins
+| 
+| Game Time: 00:00:00.1026523
+| 
+| Result: SimpleRandomBot vs DogeBotv2: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & SmarterBot 
+| 
+| CasinoShakespeare plays V | SmarterBot plays L | SmarterBot wins
+| 
+| Game Time: 00:00:00.0970647
+| 
+| Result: CasinoShakespeare vs SmarterBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & SelfLoathingBot 
+| 
+| ToddlerProof plays V | SelfLoathingBot plays L | SelfLoathingBot wins
+| 
+| Game Time: 00:00:00.1541243
+| 
+| Result: ToddlerProof vs SelfLoathingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between Analyst & DogeBotv2 
+| 
+| Analyst plays L | DogeBotv2 plays P | Analyst wins
+| 
+| Game Time: 00:00:00.1527849
+| 
+| Result: Analyst vs DogeBotv2: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmartBot & SmarterBot 
+| 
+| SmartBot plays L | SmarterBot plays L | Draw Match
+| 
+| Game Time: 00:00:00.1499530
+| 
+| Result: SmartBot vs SmarterBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & BoringBot 
+| 
+| ToddlerProof plays V | BoringBot plays P | BoringBot wins
+| 
+| Game Time: 00:00:00.1658352
+| 
+| Result: ToddlerProof vs BoringBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & SmartBot 
+| 
+| BoringBot plays P | SmartBot plays L | SmartBot wins
+| 
+| Game Time: 00:00:00.2339152
+| 
+| Result: BoringBot vs SmartBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmartBot & DogeBotv2 
+| 
+| SmartBot plays L | DogeBotv2 plays P | SmartBot wins
+| 
+| Game Time: 00:00:00.2455799
+| 
+| Result: SmartBot vs DogeBotv2: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & BoringBot 
+| 
+| Echo plays V | BoringBot plays P | BoringBot wins
+| 
+| Game Time: 00:00:00.1469220
+| 
+| Result: Echo vs BoringBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & BoringBot 
+| 
+| LizardsRule plays L | BoringBot plays P | LizardsRule wins
+| 
+| Game Time: 00:00:00.1522792
+| 
+| Result: LizardsRule vs BoringBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & SelfHatingBot 
+| 
+| LizardsRule plays L | SelfHatingBot plays S | SelfHatingBot wins
+| 
+| Game Time: 00:00:00.1565171
+| 
+| Result: LizardsRule vs SelfHatingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & SelfLoathingBot 
+| 
+| HuddleWolfTheConqueror plays P | SelfLoathingBot plays R | HuddleWolfTheConqueror wins
+| 
+| Game Time: 00:00:00.1352064
+| 
+| Result: HuddleWolfTheConqueror vs SelfLoathingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & SmarterBot 
+| 
+| HuddleWolfTheConqueror plays R | SmarterBot plays L | HuddleWolfTheConqueror wins
+| 
+| Game Time: 00:00:00.1508628
+| 
+| Result: HuddleWolfTheConqueror vs SmarterBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & SmartBot 
+| 
+| HuddleWolfTheConqueror plays V | SmartBot plays L | SmartBot wins
+| 
+| Game Time: 00:00:00.1096690
+| 
+| Result: HuddleWolfTheConqueror vs SmartBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & SelfHatingBot 
+| 
+| Echo plays V | SelfHatingBot plays V | Draw Match
+| 
+| Game Time: 00:00:00.1005403
+| 
+| Result: Echo vs SelfHatingBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & Analyst 
+| 
+| BoringBot plays P | Analyst plays L | Analyst wins
+| 
+| Game Time: 00:00:00.1576074
+| 
+| Result: BoringBot vs Analyst: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmartBot & SelfHatingBot 
+| 
+| SmartBot plays L | SelfHatingBot plays V | SmartBot wins
+| 
+| Game Time: 00:00:00.1495336
+| 
+| Result: SmartBot vs SelfHatingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & SmarterBot 
+| 
+| ToddlerProof plays V | SmarterBot plays L | SmarterBot wins
+| 
+| Game Time: 00:00:00.1449164
+| 
+| Result: ToddlerProof vs SmarterBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfLoathingBot & DogeBotv2 
+| 
+| SelfLoathingBot plays P | DogeBotv2 plays P | Draw Match
+| 
+| Game Time: 00:00:00.1613639
+| 
+| Result: SelfLoathingBot vs DogeBotv2: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between DogeBot & SelfHatingBot 
+| 
+| DogeBot plays P | SelfHatingBot plays R | DogeBot wins
+| 
+| Game Time: 00:00:00.1406625
+| 
+| Result: DogeBot vs SelfHatingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between DogeBot & SelfLoathingBot 
+| 
+| DogeBot plays P | SelfLoathingBot plays S | SelfLoathingBot wins
+| 
+| Game Time: 00:00:00.2224493
+| 
+| Result: DogeBot vs SelfLoathingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & SmarterBot 
+| 
+| BoringBot plays P | SmarterBot plays L | SmarterBot wins
+| 
+| Game Time: 00:00:00.2465839
+| 
+| Result: BoringBot vs SmarterBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfLoathingBot & SmarterBot 
+| 
+| SelfLoathingBot plays P | SmarterBot plays L | SmarterBot wins
+| 
+| Game Time: 00:00:00.2357557
+| 
+| Result: SelfLoathingBot vs SmarterBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between DogeBot & SmarterBot 
+| 
+| DogeBot plays P | SmarterBot plays L | SmarterBot wins
+| 
+| Game Time: 00:00:00.2442344
+| 
+| Result: DogeBot vs SmarterBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfHatingBot & SmarterBot 
+| 
+| SelfHatingBot plays S | SmarterBot plays L | SelfHatingBot wins
+| 
+| Game Time: 00:00:00.2262996
+| 
+| Result: SelfHatingBot vs SmarterBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between DogeBot & DogeBotv2 
+| 
+| DogeBot plays P | DogeBotv2 plays P | Draw Match
+| 
+| Game Time: 00:00:00.2240280
+| 
+| Result: DogeBot vs DogeBotv2: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & SmartBot 
+| 
+| LizardsRule plays L | SmartBot plays L | Draw Match
+| 
+| Game Time: 00:00:00.1285514
+| 
+| Result: LizardsRule vs SmartBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & Echo 
+| 
+| SimpleRandomBot plays V | Echo plays V | Draw Match
+| 
+| Game Time: 00:00:00.0453487
+| 
+| Result: SimpleRandomBot vs Echo: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & CasinoShakespeare 
+| 
+| HuddleWolfTheConqueror plays L | CasinoShakespeare plays V | HuddleWolfTheConqueror wins
+| 
+| Game Time: 00:00:00.0449960
+| 
+| Result: HuddleWolfTheConqueror vs CasinoShakespeare: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & SelfLoathingBot 
+| 
+| LizardsRule plays L | SelfLoathingBot plays V | LizardsRule wins
+| 
+| Game Time: 00:00:00.1446887
+| 
+| Result: LizardsRule vs SelfLoathingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & Analyst 
+| 
+| HuddleWolfTheConqueror plays P | Analyst plays R | HuddleWolfTheConqueror wins
+| 
+| Game Time: 00:00:00.1468847
+| 
+| Result: HuddleWolfTheConqueror vs Analyst: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & DogeBot 
+| 
+| SimpleRandomBot plays V | DogeBot plays P | DogeBot wins
+| 
+| Game Time: 00:00:00.1428356
+| 
+| Result: SimpleRandomBot vs DogeBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & CasinoShakespeare 
+| 
+| Echo plays R | CasinoShakespeare plays V | CasinoShakespeare wins
+| 
+| Game Time: 00:00:00.0518531
+| 
+| Result: Echo vs CasinoShakespeare: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & ToddlerProof 
+| 
+| SimpleRandomBot plays V | ToddlerProof plays V | Draw Match
+| 
+| Game Time: 00:00:00.1498569
+| 
+| Result: SimpleRandomBot vs ToddlerProof: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & SelfLoathingBot 
+| 
+| BoringBot plays P | SelfLoathingBot plays L | SelfLoathingBot wins
+| 
+| Game Time: 00:00:00.2398598
+| 
+| Result: BoringBot vs SelfLoathingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfHatingBot & Analyst 
+| 
+| SelfHatingBot plays V | Analyst plays S | SelfHatingBot wins
+| 
+| Game Time: 00:00:00.2359992
+| 
+| Result: SelfHatingBot vs Analyst: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & SelfLoathingBot 
+| 
+| Echo plays V | SelfLoathingBot plays V | Draw Match
+| 
+| Game Time: 00:00:00.1601556
+| 
+| Result: Echo vs SelfLoathingBot: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & ToddlerProof 
+| 
+| HuddleWolfTheConqueror plays V | ToddlerProof plays V | Draw Match
+| 
+| Game Time: 00:00:00.1471044
+| 
+| Result: HuddleWolfTheConqueror vs ToddlerProof: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & DogeBotv2 
+| 
+| ToddlerProof plays V | DogeBotv2 plays P | DogeBotv2 wins
+| 
+| Game Time: 00:00:00.2406827
+| 
+| Result: ToddlerProof vs DogeBotv2: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & DogeBot 
+| 
+| LizardsRule plays L | DogeBot plays P | LizardsRule wins
+| 
+| Game Time: 00:00:00.1419110
+| 
+| Result: LizardsRule vs DogeBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & SelfHatingBot 
+| 
+| CasinoShakespeare plays V | SelfHatingBot plays R | CasinoShakespeare wins
+| 
+| Game Time: 00:00:00.1529981
+| 
+| Result: CasinoShakespeare vs SelfHatingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfLoathingBot & Analyst 
+| 
+| SelfLoathingBot plays R | Analyst plays V | Analyst wins
+| 
+| Game Time: 00:00:00.2025419
+| 
+| Result: SelfLoathingBot vs Analyst: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmarterBot & DogeBotv2 
+| 
+| SmarterBot plays L | DogeBotv2 plays P | SmarterBot wins
+| 
+| Game Time: 00:00:00.2334202
+| 
+| Result: SmarterBot vs DogeBotv2: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & SelfHatingBot 
+| 
+| SimpleRandomBot plays V | SelfHatingBot plays R | SimpleRandomBot wins
+| 
+| Game Time: 00:00:00.1509971
+| 
+| Result: SimpleRandomBot vs SelfHatingBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SelfHatingBot & DogeBotv2 
+| 
+| SelfHatingBot plays R | DogeBotv2 plays P | DogeBotv2 wins
+| 
+| Game Time: 00:00:00.2335359
+| 
+| Result: SelfHatingBot vs DogeBotv2: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & SelfLoathingBot 
+| 
+| SimpleRandomBot plays V | SelfLoathingBot plays L | SelfLoathingBot wins
+| 
+| Game Time: 00:00:00.1403360
+| 
+| Result: SimpleRandomBot vs SelfLoathingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & DogeBotv2 
+| 
+| Echo plays S | DogeBotv2 plays P | Echo wins
+| 
+| Game Time: 00:00:00.1667020
+| 
+| Result: Echo vs DogeBotv2: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & DogeBotv2 
+| 
+| LizardsRule plays L | DogeBotv2 plays P | LizardsRule wins
+| 
+| Game Time: 00:00:00.1371481
+| 
+| Result: LizardsRule vs DogeBotv2: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & SmartBot 
+| 
+| Echo plays S | SmartBot plays L | Echo wins
+| 
+| Game Time: 00:00:00.1378130
+| 
+| Result: Echo vs SmartBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & SmarterBot 
+| 
+| Echo plays R | SmarterBot plays L | Echo wins
+| 
+| Game Time: 00:00:00.1164323
+| 
+| Result: Echo vs SmarterBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmartBot & SelfLoathingBot 
+| 
+| SmartBot plays L | SelfLoathingBot plays S | SelfLoathingBot wins
+| 
+| Game Time: 00:00:00.1650495
+| 
+| Result: SmartBot vs SelfLoathingBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & DogeBotv2 
+| 
+| HuddleWolfTheConqueror plays R | DogeBotv2 plays P | DogeBotv2 wins
+| 
+| Game Time: 00:00:00.0961643
+| 
+| Result: HuddleWolfTheConqueror vs DogeBotv2: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between Echo & LizardsRule 
+| 
+| Echo plays P | LizardsRule plays L | LizardsRule wins
+| 
+| Game Time: 00:00:00.0536828
+| 
+| Result: Echo vs LizardsRule: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & LizardsRule 
+| 
+| SimpleRandomBot plays V | LizardsRule plays L | LizardsRule wins
+| 
+| Game Time: 00:00:00.0505407
+| 
+| Result: SimpleRandomBot vs LizardsRule: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between HuddleWolfTheConqueror & DogeBot 
+| 
+| HuddleWolfTheConqueror plays S | DogeBot plays P | HuddleWolfTheConqueror wins
+| 
+| Game Time: 00:00:00.1552505
+| 
+| Result: HuddleWolfTheConqueror vs DogeBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & DogeBot 
+| 
+| CasinoShakespeare plays V | DogeBot plays P | DogeBot wins
+| 
+| Game Time: 00:00:00.1450521
+| 
+| Result: CasinoShakespeare vs DogeBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & SmartBot 
+| 
+| CasinoShakespeare plays V | SmartBot plays L | SmartBot wins
+| 
+| Game Time: 00:00:00.1613201
+| 
+| Result: CasinoShakespeare vs SmartBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmartBot & Analyst 
+| 
+| SmartBot plays L | Analyst plays S | Analyst wins
+| 
+| Game Time: 00:00:00.2473112
+| 
+| Result: SmartBot vs Analyst: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & SmartBot 
+| 
+| ToddlerProof plays V | SmartBot plays L | SmartBot wins
+| 
+| Game Time: 00:00:00.2395934
+| 
+| Result: ToddlerProof vs SmartBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between LizardsRule & CasinoShakespeare 
+| 
+| LizardsRule plays L | CasinoShakespeare plays V | LizardsRule wins
+| 
+| Game Time: 00:00:00.0522856
+| 
+| Result: LizardsRule vs CasinoShakespeare: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between CasinoShakespeare & DogeBotv2 
+| 
+| CasinoShakespeare plays V | DogeBotv2 plays P | DogeBotv2 wins
+| 
+| Game Time: 00:00:00.1177745
+| 
+| Result: CasinoShakespeare vs DogeBotv2: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between ToddlerProof & DogeBot 
+| 
+| ToddlerProof plays V | DogeBot plays P | DogeBot wins
+| 
+| Game Time: 00:00:00.1754989
+| 
+| Result: ToddlerProof vs DogeBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between SmartBot & DogeBot 
+| 
+| SmartBot plays L | DogeBot plays P | SmartBot wins
+| 
+| Game Time: 00:00:00.1608652
+| 
+| Result: SmartBot vs DogeBot: 1 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between SimpleRandomBot & BoringBot 
+| 
+| SimpleRandomBot plays V | BoringBot plays P | BoringBot wins
+| 
+| Game Time: 00:00:00.0932909
+| 
+| Result: SimpleRandomBot vs BoringBot: 0 - 1
++--------------------------------------------------------------------------------------------+
+| Starting Game between BoringBot & DogeBotv2 
+| 
+| BoringBot plays P | DogeBotv2 plays P | Draw Match
+| 
+| Game Time: 00:00:00.1427381
+| 
+| Result: BoringBot vs DogeBotv2: 0 - 0
++--------------------------------------------------------------------------------------------+
+| Starting Game between DogeBot & Analyst 
+| 
+| DogeBot plays P | Analyst plays V | DogeBot wins
+| 
+| Game Time: 00:00:00.1424190
+| 
+| Result: DogeBot vs Analyst: 1 - 0
+| Pos # | Author               | Name                                     | Language   | Score | Win   | Draw  | Loss  | Avg. Dec. Time |
++-------+----------------------+------------------------------------------+------------+-------+-------+-------+-------+----------------+
+| 1st   | Mikey Mouse          | LizardsRule                              | .NET       | 008   | 008   | 004   | 001   | 0025.46 ms     |
+| 1st   | Stretch Maniac       | SmartBot                                 | Java       | 008   | 008   | 002   | 003   | 0104.69 ms     |
+| 3rd   | Qwix                 | Analyst                                  | Java       | 007   | 007   | 002   | 004   | 0100.77 ms     |
+| 3rd   | Stretch Maniac       | SmarterBot                               | Java       | 007   | 007   | 002   | 004   | 0097.77 ms     |
+| 5th   | JoshDM               | SelfLoathingBot                          | Java       | 006   | 006   | 002   | 005   | 0102.77 ms     |
+| 6th   | HuddleWolf           | HuddleWolfTheConqueror                   | .NET       | 005   | 005   | 002   | 006   | 0024.38 ms     |
+| 6th   | ProgramFOX           | Echo                                     | .NET       | 005   | 005   | 004   | 004   | 0025.08 ms     |
+| 6th   | kaine                | BoringBot                                | Java       | 005   | 005   | 002   | 006   | 0102.15 ms     |
+| 6th   | Milo                 | DogeBot                                  | Java       | 005   | 005   | 003   | 005   | 0101.92 ms     |
+| 6th   | JoshDM               | SelfHatingBot                            | Java       | 005   | 005   | 002   | 006   | 0102.23 ms     |
+| 6th   | Milo                 | DogeBotv2                                | Java       | 005   | 005   | 003   | 005   | 0098.69 ms     |
+| 12th  | Daniel               | CasinoShakespeare                        | .NET       | 003   | 003   | 002   | 008   | 0023.31 ms     |
+| 13th  | EoinC                | SimpleRandomBot                          | .NET       | 002   | 002   | 004   | 007   | 0024.23 ms     |
+| 14th  | Stranjyr             | ToddlerProof                             | Java       | 001   | 001   | 004   | 008   | 0103.69 ms     |
++-------+----------------------+------------------------------------------+------------+-------+-------+-------+-------+----------------+
+Total Players: 14
+Total Matches Completed: 91
+Total Tourney Time: 00:00:14.4838470

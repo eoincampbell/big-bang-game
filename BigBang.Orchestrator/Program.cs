@@ -20,7 +20,7 @@ namespace BigBang.Orchestrator
                     new Player { Author = "HuddleWolf", Language = ".NET", Name = "HuddleWolfTheConqueror", BotExecutable = @"HuddleWolfTheConqueror\HuddleWolfTheConqueror.exe", RequiresCompile = true},
                     new Player { Author = "ProgramFOX", Language = ".NET", Name = "Echo", BotExecutable = @"Echo\Echo.exe" , RequiresCompile = true},
                     new Player { Author = "Mikey Mouse", Language = ".NET", Name = "LizardsRule", BotExecutable = @"LizardsRule\LizardsRule.exe" , RequiresCompile = true},
-                    new Player { Author = "Daniel", Language = ".NET", Name = "CasinoShakespeare", BotExecutable = @"CasinoShakespeare\CasinoShakespeare.exe" , RequiresCompile = true},
+                    //new Player { Author = "Daniel", Language = ".NET", Name = "CasinoShakespeare", BotExecutable = @"CasinoShakespeare\CasinoShakespeare.exe" , RequiresCompile = true},
                    
                     //JAVA
                     new Player { Author = "Stranjyr", Language = "Java", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
@@ -93,6 +93,23 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Ourous", Language = "Cobra", Name = "QQ", BotExecutable = @"QQ\QQ.exe",RequiresCompile = true},                  
                     new Player { Author = "Ourous", Language = "Cobra", Name = "DejaQ", BotExecutable = @"DejaQ\DejaQ.exe",RequiresCompile = true},                    
                     new Player { Author = "Ourous", Language = "Cobra", Name = "GitGudBot", BotExecutable = @"GitGudBot\GitGudBot.exe",RequiresCompile = true},                    
+ 
+
+
+////BROKEN          new Player { Author = "ja72", Language = ".NET", Name = "BlindForesight", BotExecutable = @"BlindForesight\BlindForesight.exe" , RequiresCompile = true},
+                    new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "BetterLisaSimpson", BotExecutable = @"BetterLisaSimpson\BetterLisaSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Docopoper", Language = "Python2", Name = "ConcessionBot", BotExecutable = @"ConcessionBot\ConcessionBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "Docopoper", Language = "Python2", Name = "OboeBeater", BotExecutable = @"OboeBeater\OboeBeater.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "Docopoper", Language = "Python2", Name = "OboeOboeBeater", BotExecutable = @"OboeOboeBeater\OboeOboeBeater.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+
+                    new Player { Author = "Carlos Martinez", Language = "Java", Name = "EasyGame", JavaArgs = "EasyGame", BotExecutable = @"EasyGame", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Roy van Rijn", Language = "Java", Name = "Gazzr", JavaArgs = "Gazzr", BotExecutable = @"Gazzr", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Josef E.", Language = "Java", Name = "OneBehind", JavaArgs = "OneBehind", BotExecutable = @"OneBehind", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+
+                    new Player { Author = "undergroundmonorail", Language = "Python2", Name = "TheGamblersBrother", BotExecutable = @"TheGamblersBrother\TheGamblersBrother.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+
+                    new Player { Author = "Thaylon", Language = "Ruby", Name = "Naan", BotExecutable = @"Naan\Naan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Thaylon", Language = "Ruby", Name = "NaanViolence", BotExecutable = @"NaanViolence\NaanViolence.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
 
 
                 };
@@ -110,7 +127,9 @@ namespace BigBang.Orchestrator
 
         static void Main(string[] args)
         {
-            using (StreamWriter sw = new StreamWriter("Tournament.log", false))
+            var gameLogDirectory = string.Format(@"C:\Temp\BigBang\{0:yyyyMMddHHmm}\", DateTime.Now);
+            Directory.CreateDirectory(gameLogDirectory);
+            using (StreamWriter sw = new StreamWriter(Path.Combine(gameLogDirectory, "Tournament.log"), false))
             {
                 // BuildWhereRequired(players);
                 var tourneyTimer = new Stopwatch();
@@ -121,35 +140,7 @@ namespace BigBang.Orchestrator
 
                 foreach (var match in matches)
                 {
-                    Player p1 = null, p2 = null;
-                    try
-                    {
-                        if (match[0] == null || match[1] == null)
-                        {
-                            throw new ApplicationException("One or more players didn't show!");
-                        }
-                        p1 = match[0];
-                        p2 = match[1];
-
-                        var result = Play(p1, p2, sw);
-                        results.Add(result);
-
-                        var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}", 
-                            result.P1, 
-                            result.P2, 
-                            result.P1Score,
-                            result.P2Score);
-
-                        sw.WriteLine("| ");
-                        sw.WriteLine("| {0}", resultMessage);
-
-                        Console.WriteLine(resultMessage);
-                    }
-
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
+                    PlayMatch(match, sw, gameLogDirectory, results);
                 }
 
                 foreach (var r in results)
@@ -201,11 +192,44 @@ namespace BigBang.Orchestrator
                 Console.WriteLine(printResults);
             }
 
-            var logdir = Path.GetFullPath(@"..\..\..\tourneys\");
-            File.Copy("Tournament.log",
-                Path.Combine(logdir, string.Format("Tournament-{0:yyyy-MM-dd-HH-mm-ss}.txt", DateTime.Now)));
+            //var logdir = Path.GetFullPath(@"..\..\..\tourneys\");
+            //File.Copy("Tournament.log",
+            //    Path.Combine(logdir, string.Format("Tournament-{0:yyyy-MM-dd-HH-mm-ss}.txt", DateTime.Now)));
             Console.WriteLine("Done!");
             Console.ReadLine();
+        }
+
+        private static void PlayMatch(IList<Player> match, StreamWriter sw, string gameLogDirectory, List<Result> results)
+        {
+            Player p1 = null, p2 = null;
+            try
+            {
+                if (match[0] == null || match[1] == null)
+                {
+                    throw new ApplicationException("One or more players didn't show!");
+                }
+                p1 = match[0];
+                p2 = match[1];
+
+                var result = Play(p1, p2, sw, gameLogDirectory);
+                results.Add(result);
+
+                var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
+                    result.P1,
+                    result.P2,
+                    result.P1Score,
+                    result.P2Score);
+
+                sw.WriteLine("| ");
+                sw.WriteLine("| {0}", resultMessage);
+
+                Console.WriteLine(resultMessage);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private static string PrintResultGrid(IEnumerable<Player> resultGrid )
@@ -266,7 +290,7 @@ namespace BigBang.Orchestrator
 
         }
 
-        public static Result Play(Player p1, Player p2, StreamWriter sw)
+        public static Result Play(Player p1, Player p2, StreamWriter sw, string gameLogDirectory)
         {
             var dir = PlayerDirectory;
 
@@ -328,7 +352,29 @@ namespace BigBang.Orchestrator
             swGame.Stop();
             sb.AppendLine("| ");
             sb.AppendFormat("| Game Time: {0}", swGame.Elapsed);
+
+
+
+
             sw.WriteLine(sb.ToString());
+
+            var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
+                            result.P1,
+                            result.P2,
+                            result.P1Score,
+                            result.P2Score);
+
+            sb.AppendLine("| ");
+            sb.AppendFormat("| {0}", resultMessage);
+
+            using (var p1sw = new StreamWriter(Path.Combine(gameLogDirectory, p1.Name + ".log"), true))
+            {
+                p1sw.WriteLine(sb.ToString());
+            }
+            using (var p2sw = new StreamWriter(Path.Combine(gameLogDirectory, p2.Name + ".log"), true))
+            {
+                p2sw.WriteLine(sb.ToString());
+            }
 
             result.P1AvgTimeMs = p1Times.Average();
             result.P2AvgTimeMs = p2Times.Average();
