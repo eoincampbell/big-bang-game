@@ -56,11 +56,11 @@ namespace SO.BlindForesight
 
         static void Main(string[] args)
         {
-            int n=args[0].Length;
-            if(n==0) { Return(rnd.Next(0, 5)); }
-            else if(n==1) { throw new ArgumentException(); }
+            if(args.Length==0) { Return(rnd.Next(0, 5)); }
+            else if(args.Length==1) { throw new ArgumentException(); }
             else
             {
+                int n=args[0].Length;
                 Game last=new Game(args[0][n-1], args[1][n-1]);
                 if(last.result==Outcome.Loss)
                 {

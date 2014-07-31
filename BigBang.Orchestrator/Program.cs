@@ -45,7 +45,7 @@ namespace BigBang.Orchestrator
 //// BROKEN         new Player { Author = "Rory O'Kane", Language = "Ruby", Name = "RandomlyWeighted", BotExecutable = @"RandomlyWeighted\RandomlyWeighted.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "WereVulcan", BotExecutable = @"WereVulcan\WereVulcan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "BartBot", BotExecutable = @"BartBot\BartBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
-                    new Player { Author = "histocrat", Language = "Ruby", Name = "LoopholeAbuser", BotExecutable = @"LoopholeAbuser\LoopholeAbuser.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+////WITHDRAWN       new Player { Author = "histocrat", Language = "Ruby", Name = "LoopholeAbuser", BotExecutable = @"LoopholeAbuser\LoopholeAbuser.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "Alternator", BotExecutable = @"Alternator\Alternator.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Thaylon", Language = "Ruby", Name = "UniformBot", BotExecutable = @"UniformBot\UniformBot.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "BartSimpson", BotExecutable = @"BartSimpson\BartSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
@@ -67,6 +67,8 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Claudiu", Language = "Python2", Name = "SuperMarkov", BotExecutable = @"SuperMarkov\SuperMarkov.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "cipher", Language = "Python2", Name = "LemmingBot", BotExecutable = @"LemmingBot\LemmingBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "Docopoper", Language = "Python2", Name = "RoboticOboeBotOboeTuner", BotExecutable = @"RoboticOboeBotOboeTuner\RoboticOboeBotOboeTuner.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+
+
 
                     //LUA
                     new Player { Author = "William Barbosa", Language = "Lua", Name = "BarneyStinson", BotExecutable = @"BarneyStinson\BarneyStinson.lua", PrefixCommand = @"C:\Program Files (x86)\Lua\5.1\lua.exe"},
@@ -110,6 +112,8 @@ namespace BigBang.Orchestrator
 
                     new Player { Author = "Thaylon", Language = "Ruby", Name = "Naan", BotExecutable = @"Naan\Naan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Thaylon", Language = "Ruby", Name = "NaanViolence", BotExecutable = @"NaanViolence\NaanViolence.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
+                    new Player { Author = "Stranjyr", Language = "Python2", Name = "RelaxedBot", BotExecutable = @"RelaxedBot\RelaxedBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "histocrat", Language = "Ruby", Name = "LeonardShelby", BotExecutable = @"LeonardShelby\LeonardShelby.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
 
 
                 };

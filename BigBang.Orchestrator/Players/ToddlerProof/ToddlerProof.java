@@ -1,6 +1,7 @@
 import java.util.HashMap;
 public class ToddlerProof
 {
+    char[] moves = new char[]{'R', 'P', 'S', 'L', 'V'};
     public static void main(String[] args)
     {
         if(args.length<1) //first Round
@@ -49,11 +50,13 @@ public class ToddlerProof
                     else streak++;
                 }
                 //check lossStreak
-                if(streak>5)
+                //If the streak is 2, then a rotation will make it even.
+                //if it is >2, something bad has happened and I need to adjust.
+                if(streak>2)
                 {
                     //if they are on to me, do something random-ish
                     int r = (((them.length()+me.length()-1)*13)/7)%4;
-                    System.out.print(nextMove.get(r));
+                    System.out.print(move[r]);
                     return;
                 }
                 //otherwise, go on with the plan

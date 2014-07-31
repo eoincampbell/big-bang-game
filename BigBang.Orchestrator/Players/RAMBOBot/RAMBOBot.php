@@ -1,27 +1,55 @@
 <?php
-/* RamboBot public alpha */
+/* RamboBot public beta */
 class V{
     protected $protected;
     function p(){
         return [get_class($this->protected),"P"];
     }
 }
+
+
 function generateKnowledge($l,$o){
+
     $j = generateResist();
-    $knowledge = [ $j[0][0], $j[1][0], $j[1][1], $j[2], $j[4] ];
+    $knowledge = [ $j[0][0], $j[1][0], $j[1][1], $j[2], $j[4], mt_rand(0,1), (100/3) ];
     if($l[0] != ""){
         $am = [
             $j[0][0]=>[count(array_keys($l, $j[0][0])),count(array_keys($o, $j[0][0]))],$j[1][0]=>[count(array_keys($l, $j[1][0])),count(array_keys($o, $j[1][0]))],$j[1][1]=>[count(array_keys($l, $j[1][1])),count(array_keys($o, $j[1][1]))],$j[2]=>[count(array_keys($l, $j[2])),count(array_keys($o, $j[2]))],$j[4]=>[count(array_keys($l, $j[4])),count(array_keys($o, $j[4]))]
         ];
         $ma = [];
+        $y=0;
         foreach ($am as $key => $value) {
-            $ma[]=round(( $value[1]/count($l)) *100  );
+            $ma[]=round(( $value[1]/count($o)) * 100 );
+            $y+=round(( $value[1]/count($o)) * 100 );
         }
-        return array("k"=>$knowledge,"a"=>array_search(max($ma), $ma));
+        $mu=$ma[(array_search(max($ma), $ma))];
+        $me=($y / count($am));
+        $mo=[];
+        foreach ($ma as $key => $value) {
+            if($value==0.0){$mo[]=$key;}
+        }
+        $i=$knowledge;
+        unset($i[5]);unset($i[6]);
+        foreach ($mo as $no) {
+            unset($i[$no]);
+        }
+        if(($mu-$me)>$knowledge[6]){            
+            $e=array_search(max($ma), $ma);
+        }elseif (count($o) > $knowledge[6]) {
+            if(count($mo)>0){
+                $e=array_rand($i);
+            }else{
+                $e=array_search(max($ma), $ma);
+            }
+        }else {
+            $e=array_rand($i);
+        }
     }else {
-        return array("k"=>$knowledge,"a"=>rand(1,4));
+        $e=mt_rand(0,4);
     }
+    return array("k"=>$knowledge,"a"=>$e);
 }
+
 function generateResist (){
     $t = (string)float;
     $f=["S",'f'];
@@ -53,6 +81,5 @@ switch ($h["k"][$h["a"]]) {
 
     default:
         exit;
-
 }
 ?>
