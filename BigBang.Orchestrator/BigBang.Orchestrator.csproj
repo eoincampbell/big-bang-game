@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Result.cs" />
     <None Include="Players\Evolver\Evolver.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -300,6 +301,9 @@
     <None Include="Players\BlindForesight\BlindForesight.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerConfig.cs" />
+    <Compile Include="ProcessRunner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Players\ToddlerProof\Build.bat">
