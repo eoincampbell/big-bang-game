@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Players\Evolver\Evolver.lua">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Players\IHaveNoIdeaWhatImDoing\Build.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -271,6 +274,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Players\ExcitingishBot\ExcitingishBot.java">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\Dienstag\Dienstag.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\TobiasFuenke\TobiasFuenke.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Players\ToddlerProof\ToddlerProof.java">

@@ -121,6 +121,11 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Luis Mars", Language = "Java", Name = "Botzinga", JavaArgs = "Botzinga", BotExecutable = @"Botzinga", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
 
                     new Player { Author = "NonFunctional User29916", Language = "Lisp", Name = "IHaveNoIdeaWhatImDoing", BotExecutable = @"IHaveNoIdeaWhatImDoing\IHaveNoIdeaWhatImDoing.exe" , RequiresCompile = true},
+                    new Player { Author = "Emil", Language = "Python2", Name = "Dienstag", BotExecutable = @"Dienstag\Dienstag.py", PrefixCommand = @"C:\Python27\python.exe"},                    
+                    new Player { Author = "john smith", Language = "PHP", Name = "RAMBOBot", BotExecutable = @"RAMBOBot\RAMBOBot.php", PrefixCommand = @"C:\PHP5.15\php.exe"} ,                  
+                    new Player { Author = "robotik", Language = "Lua", Name = "Evolver", BotExecutable = @"Evolver\Evolver.lua", PrefixCommand = @"C:\Program Files (x86)\Lua\5.1\lua.exe"},
+
+                    new Player { Author = "ovenror", Language = "Python2", Name = "TobiasFuenke", BotExecutable = @"TobiasFuenke\TobiasFuenke.py", PrefixCommand = @"C:\Python27\python.exe"},                    
 
                 };
         
