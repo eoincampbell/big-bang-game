@@ -12,7 +12,8 @@ namespace BigBang.Orchestrator
 
     public class Program
     {
-        
+        public static object SYNC_LOCK = new object();
+        public static object PROC_LOCK = new object();
         
         public static List<Player> players = new List<Player>(){
                    //.NET
@@ -20,18 +21,18 @@ namespace BigBang.Orchestrator
                     new Player { Author = "HuddleWolf", Language = ".NET", Name = "HuddleWolfTheConqueror", BotExecutable = @"HuddleWolfTheConqueror\HuddleWolfTheConqueror.exe", RequiresCompile = true},
                     new Player { Author = "ProgramFOX", Language = ".NET", Name = "Echo", BotExecutable = @"Echo\Echo.exe" , RequiresCompile = true},
                     new Player { Author = "Mikey Mouse", Language = ".NET", Name = "LizardsRule", BotExecutable = @"LizardsRule\LizardsRule.exe" , RequiresCompile = true},
-                    //new Player { Author = "Daniel", Language = ".NET", Name = "CasinoShakespeare", BotExecutable = @"CasinoShakespeare\CasinoShakespeare.exe" , RequiresCompile = true},
+////OFFLINE RUN     //new Player { Author = "Daniel", Language = ".NET", Name = "CasinoShakespeare", BotExecutable = @"CasinoShakespeare\CasinoShakespeare.exe" , RequiresCompile = true},
                    
                     //JAVA
-                    new Player { Author = "Stranjyr", Language = "Java", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "kaine", Language = "Java", Name = "BoringBot", JavaArgs = "BoringBot", BotExecutable = @"BoringBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe"},
-                    new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmartBot", JavaArgs = "SmartBot", BotExecutable = @"SmartBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "Milo", Language = "Java", Name = "DogeBot", JavaArgs = "DogeBot", BotExecutable = @"DogeBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "JoshDM", Language = "Java", Name = "SelfLoathingBot", JavaArgs = "SelfLoathingBot", BotExecutable = @"SelfLoathingBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "JoshDM", Language = "Java", Name = "SelfHatingBot", JavaArgs = "SelfHatingBot", BotExecutable = @"SelfHatingBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "Qwix", Language = "Java", Name = "Analyst", JavaArgs = "Analyst", BotExecutable = @"Analyst", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmarterBot", JavaArgs = "SmarterBot", BotExecutable = @"SmarterBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "Milo", Language = "Java", Name = "DogeBotv2", JavaArgs = "DogeBotv2", BotExecutable = @"DogeBotv2", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Stranjyr", Language = "Java", Name = "ToddlerProof", JavaArgs = "ToddlerProof", BotExecutable = @"ToddlerProof", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "kaine", Language = "Java", Name = "BoringBot", JavaArgs = "BoringBot", BotExecutable = @"BoringBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true},
+                    new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmartBot", JavaArgs = "SmartBot", BotExecutable = @"SmartBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "Milo", Language = "Java", Name = "DogeBot", JavaArgs = "DogeBot", BotExecutable = @"DogeBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "JoshDM", Language = "Java", Name = "SelfLoathingBot", JavaArgs = "SelfLoathingBot", BotExecutable = @"SelfLoathingBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "JoshDM", Language = "Java", Name = "SelfHatingBot", JavaArgs = "SelfHatingBot", BotExecutable = @"SelfHatingBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "Qwix", Language = "Java", Name = "Analyst", JavaArgs = "Analyst", BotExecutable = @"Analyst", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" , RequiresCompile = true},
+                    new Player { Author = "Stretch Maniac", Language = "Java", Name = "SmarterBot", JavaArgs = "SmarterBot", BotExecutable = @"SmarterBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "Milo", Language = "Java", Name = "DogeBotv2", JavaArgs = "DogeBotv2", BotExecutable = @"DogeBotv2", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
 
                     //Ruby
                     new Player { Author = "William Barbosa", Language = "Ruby", Name = "StarWarsFan", BotExecutable = @"StarWarsFan\StarWarsFan.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
@@ -96,17 +97,18 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Ourous", Language = "Cobra", Name = "DejaQ", BotExecutable = @"DejaQ\DejaQ.exe",RequiresCompile = true},                    
                     new Player { Author = "Ourous", Language = "Cobra", Name = "GitGudBot", BotExecutable = @"GitGudBot\GitGudBot.exe",RequiresCompile = true},                    
  
+                    //LISP
 
 
-////BROKEN          new Player { Author = "ja72", Language = ".NET", Name = "BlindForesight", BotExecutable = @"BlindForesight\BlindForesight.exe" , RequiresCompile = true},
+                    new Player { Author = "ja72", Language = ".NET", Name = "BlindForesight", BotExecutable = @"BlindForesight\BlindForesight.exe" , RequiresCompile = true},
                     new Player { Author = "Dr R Dizzle", Language = "Ruby", Name = "BetterLisaSimpson", BotExecutable = @"BetterLisaSimpson\BetterLisaSimpson.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
                     new Player { Author = "Docopoper", Language = "Python2", Name = "ConcessionBot", BotExecutable = @"ConcessionBot\ConcessionBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "Docopoper", Language = "Python2", Name = "OboeBeater", BotExecutable = @"OboeBeater\OboeBeater.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "Docopoper", Language = "Python2", Name = "OboeOboeBeater", BotExecutable = @"OboeOboeBeater\OboeOboeBeater.py", PrefixCommand = @"C:\Python27\python.exe"},                    
 
-                    new Player { Author = "Carlos Martinez", Language = "Java", Name = "EasyGame", JavaArgs = "EasyGame", BotExecutable = @"EasyGame", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "Roy van Rijn", Language = "Java", Name = "Gazzr", JavaArgs = "Gazzr", BotExecutable = @"Gazzr", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
-                    new Player { Author = "Josef E.", Language = "Java", Name = "OneBehind", JavaArgs = "OneBehind", BotExecutable = @"OneBehind", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" },
+                    new Player { Author = "Carlos Martinez", Language = "Java", Name = "EasyGame", JavaArgs = "EasyGame", BotExecutable = @"EasyGame", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+                    new Player { Author = "Roy van Rijn", Language = "Java", Name = "Gazzr", JavaArgs = "Gazzr", BotExecutable = @"Gazzr", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" , RequiresCompile = true},
+                    new Player { Author = "Josef E.", Language = "Java", Name = "OneBehind", JavaArgs = "OneBehind", BotExecutable = @"OneBehind", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
 
                     new Player { Author = "undergroundmonorail", Language = "Python2", Name = "TheGamblersBrother", BotExecutable = @"TheGamblersBrother\TheGamblersBrother.py", PrefixCommand = @"C:\Python27\python.exe"},                    
 
@@ -115,6 +117,10 @@ namespace BigBang.Orchestrator
                     new Player { Author = "Stranjyr", Language = "Python2", Name = "RelaxedBot", BotExecutable = @"RelaxedBot\RelaxedBot.py", PrefixCommand = @"C:\Python27\python.exe"},                    
                     new Player { Author = "histocrat", Language = "Ruby", Name = "LeonardShelby", BotExecutable = @"LeonardShelby\LeonardShelby.rb", PrefixCommand = @"C:\Ruby200-x64\bin\ruby.exe"},                    
 
+                    new Player { Author = "kaine", Language = "Java", Name = "ExcitingishBot", JavaArgs = "ExcitingishBot", BotExecutable = @"ExcitingishBot", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe" , RequiresCompile = true},
+                    new Player { Author = "Luis Mars", Language = "Java", Name = "Botzinga", JavaArgs = "Botzinga", BotExecutable = @"Botzinga", PrefixCommand = @"C:\Program Files\Java\jre8\bin\java.exe", RequiresCompile = true },
+
+                    new Player { Author = "NonFunctional User29916", Language = "Lisp", Name = "IHaveNoIdeaWhatImDoing", BotExecutable = @"IHaveNoIdeaWhatImDoing\IHaveNoIdeaWhatImDoing.exe" , RequiresCompile = true},
 
                 };
         
@@ -135,7 +141,8 @@ namespace BigBang.Orchestrator
             Directory.CreateDirectory(gameLogDirectory);
             using (StreamWriter sw = new StreamWriter(Path.Combine(gameLogDirectory, "Tournament.log"), false))
             {
-                // BuildWhereRequired(players);
+                //BuildWhereRequired(players);
+                
                 var tourneyTimer = new Stopwatch();
                 tourneyTimer.Start();
                 
@@ -146,6 +153,13 @@ namespace BigBang.Orchestrator
                 {
                     PlayMatch(match, sw, gameLogDirectory, results);
                 }
+
+                //Parallel.ForEach(matches, 
+                //    new ParallelOptions() { MaxDegreeOfParallelism = 8 } ,
+                //    match =>
+                //{
+                //    PlayMatch(match, sw, gameLogDirectory, results);
+                //});
 
                 foreach (var r in results)
                 {
@@ -224,9 +238,10 @@ namespace BigBang.Orchestrator
                     result.P1Score,
                     result.P2Score);
 
-                sw.WriteLine("| ");
-                sw.WriteLine("| {0}", resultMessage);
-
+                
+                    sw.WriteLine("| ");
+                    sw.WriteLine("| {0}", resultMessage);
+                
                 Console.WriteLine(resultMessage);
             }
 
@@ -291,7 +306,6 @@ namespace BigBang.Orchestrator
                     proc.WaitForExit();
                 }
             }
-
         }
 
         public static Result Play(Player p1, Player p2, StreamWriter sw, string gameLogDirectory)
@@ -359,9 +373,9 @@ namespace BigBang.Orchestrator
 
 
 
-
-            sw.WriteLine(sb.ToString());
-
+            
+                sw.WriteLine(sb.ToString());
+            
             var resultMessage = string.Format("Result: {0} vs {1}: {2} - {3}",
                             result.P1,
                             result.P2,
@@ -371,14 +385,16 @@ namespace BigBang.Orchestrator
             sb.AppendLine("| ");
             sb.AppendFormat("| {0}", resultMessage);
 
-            using (var p1sw = new StreamWriter(Path.Combine(gameLogDirectory, p1.Name + ".log"), true))
-            {
-                p1sw.WriteLine(sb.ToString());
-            }
-            using (var p2sw = new StreamWriter(Path.Combine(gameLogDirectory, p2.Name + ".log"), true))
-            {
-                p2sw.WriteLine(sb.ToString());
-            }
+          
+
+                using (var p1sw = new StreamWriter(Path.Combine(gameLogDirectory, p1.Name + ".log"), true))
+                {
+                    p1sw.WriteLine(sb.ToString());
+                }
+                using (var p2sw = new StreamWriter(Path.Combine(gameLogDirectory, p2.Name + ".log"), true))
+                {
+                    p2sw.WriteLine(sb.ToString());
+                }
 
             result.P1AvgTimeMs = p1Times.Average();
             result.P2AvgTimeMs = p2Times.Average();
@@ -419,10 +435,12 @@ namespace BigBang.Orchestrator
                     : string.Format("{0} {1}", player1ParamList, player2ParamList);
             }
 
-            p.Start();
-            string output = p.StandardOutput.ReadToEnd().Trim();
-
-            p.WaitForExit();
+            string output = string.Empty;
+            
+                p.Start();
+                output = p.StandardOutput.ReadToEnd().Trim();
+                p.WaitForExit();
+            
 
             return output.Length > 1
                 ? output.Substring(0, 1)
