@@ -1,0 +1,1 @@
+"C:\Program Files\Steel Bank Common Lisp\1.2.1\sbcl.exe" --load IHaveNoIdeaWhatImDoing.lisp --eval "(sb-ext:save-lisp-and-die \"IHaveNoIdeaWhatImDoing.exe\" :toplevel #'main :executable t)" --core c:\\Program\ Files\\Steel\ Bank\ Common\ Lisp\\1.2.1\\sbcl.core

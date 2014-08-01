@@ -1,7 +1,7 @@
 import java.util.HashMap;
 public class ToddlerProof
 {
-    char[] moves = new char[]{'R', 'P', 'S', 'L', 'V'};
+    static char[] moves = new char[]{'R', 'P', 'S', 'L', 'V'};
     public static void main(String[] args)
     {
         if(args.length<1) //first Round
@@ -56,7 +56,7 @@ public class ToddlerProof
                 {
                     //if they are on to me, do something random-ish
                     int r = (((them.length()+me.length()-1)*13)/7)%4;
-                    System.out.print(move[r]);
+                    System.out.print(moves[r]);
                     return;
                 }
                 //otherwise, go on with the plan

@@ -27,9 +27,9 @@ public class ExcitingishBot
             }
         }
 
-        if (myPreviousPlays.length()>2){
+        if (myPreviousPlays.length>2){
         for (int j=1; j<3; j++) {
-            switch(myPreviousPlays[myPreviousPlays.length()-j]){
+            switch(myPreviousPlays[myPreviousPlays.length-j]){
                 case 'R': Paper+=5; Spock+=5; break;
                 case 'P': Scissors+=5; Lizard+=5; break;
                 case 'S': Rock+=5; Spock+=5; break;

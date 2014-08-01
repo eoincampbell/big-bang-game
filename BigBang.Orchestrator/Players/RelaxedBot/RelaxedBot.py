@@ -22,8 +22,8 @@ def beat(me, them):
     return 1
 
 if len(sys.argv) > 1:
-    if beat((argv[1])[-1], (argv[2])[-1]) > 0:
-        print(argv[1][-1])
+    if beat((sys.argv[1])[-1], (sys.argv[2])[-1]) > 0:
+        print(sys.argv[1][-1])
 
     else:
         print(pickRand())

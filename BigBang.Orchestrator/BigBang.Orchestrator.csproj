@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Players\IHaveNoIdeaWhatImDoing\Build.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Players\IHaveNoIdeaWhatImDoing\IHaveNoIdeaWhatImDoing.lisp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Players\BetterLisaSimpson\BetterLisaSimpson.rb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
