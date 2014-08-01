@@ -2,48 +2,56 @@ import java.util.Random;
 
 public class Analyst{
     public static void main(String[] args){
-
-        String previousMoves = null;
-        Random rand = new Random(System.currentTimeMillis());
-
-        //account for not enough info
-        if(args.length == 0){
-            System.out.print(randomMove(rand.nextInt(5)));
-            System.exit(0);
-        }else if(args.length < 5){
-            System.out.print(counterFor(args[0].charAt(args[0].length()-1)));
-            System.exit(0);
-        }else{
-            previousMoves = args[0];
-        }
-
-        //get previous moves
-        String[] movesArray = previousMoves.split(",");
-        char[] enemyMoves = movesArray[1].toCharArray(), myMoves = movesArray[0].toCharArray();
         char action = 'S';
 
-        //test if they're trying to beat our last move
-        if(beats(enemyMoves[enemyMoves.length-1], myMoves[myMoves.length-2])){
-            action = counterFor(counterFor(myMoves[myMoves.length-1]));
-        }
-        //test if they're copying our last move
-        else if(enemyMoves[enemyMoves.length-1] == myMoves[myMoves.length-2]){
-            action = counterFor(myMoves[myMoves.length-1]);
-        }
-        //else beat whatever they've done the most of
-        else{
-            action = counterFor(countMost(enemyMoves));
-        }
+        try{
+            char[] enemyMoves = null, myMoves = null;
 
-        //if they've beaten us for the first 40 moves, do the opposite of what ive been doing
-        if(theyreSmarter(movesArray)){
-            action = counterFor(action);
+            //first move is random
+            if(args.length == 0){
+                System.out.print(randomMove());
+                System.exit(0);
+            //moves 2-3 will beat their last move
+            }else if(args[0].length() < 8){
+                System.out.print(counterFor(args[1].charAt(args[1].length()-1)));
+                System.exit(0);
+            //following moves will execute some analyzation stuff
+            }else{
+                //get previous moves
+                myMoves = args[0].toCharArray();
+                enemyMoves = args[1].toCharArray();
+            }
+
+            //test if they're trying to beat our last move
+            if(beats(enemyMoves[enemyMoves.length-1], myMoves[myMoves.length-2])){
+                action = counterFor(counterFor(myMoves[myMoves.length-1]));
+            }
+            //test if they're copying our last move
+            else if(enemyMoves[enemyMoves.length-1] == myMoves[myMoves.length-2]){
+                action = counterFor(myMoves[myMoves.length-1]);
+            }
+            //else beat whatever they've done the most of
+            else{
+                action = counterFor(countMost(enemyMoves));
+            }
+
+            //if they've beaten us for the first 40 moves, do the opposite of what ive been doing
+            if(theyreSmarter(myMoves, enemyMoves)){
+                action = counterFor(action);
+            }
+
+        //if you break my program do something random
+        }catch (Exception e){
+            action = randomMove();
         }
 
         System.out.print(action);
     }
 
-    private static char randomMove(int randomMove){
+    private static char randomMove(){
+        Random rand = new Random(System.currentTimeMillis());
+        int randomMove = rand.nextInt(5);
+
         switch (randomMove){
             case 0: return 'R';
             case 1: return 'P';
@@ -55,7 +63,6 @@ public class Analyst{
 
     private static char counterFor(char move){
         Random rand = new Random(System.currentTimeMillis());
-
         int moveSet = rand.nextInt(2);
 
         if(moveSet == 0){
@@ -145,8 +152,7 @@ public class Analyst{
         }
     }
 
-    private static boolean theyreSmarter(String[] movesArray){
-        char[] enemyMoves = movesArray[1].toCharArray(), myMoves = movesArray[0].toCharArray();
+    private static boolean theyreSmarter(char[] myMoves, char[] enemyMoves){
         int loseCounter = 0;
 
         if(enemyMoves.length >= 40){
