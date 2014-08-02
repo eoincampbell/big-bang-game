@@ -116,37 +116,40 @@ namespace BigBang.Orchestrator
 
                 var mg = new MatchGenerator();
 
-                var matches = new Combinations<Player>(PlayerConfig.Players.Take(20).ToList(), 2, GenerateOption.WithoutRepetition)
+                var matches = new Combinations<Player>(PlayerConfig.Players, 2, GenerateOption.WithoutRepetition)
 
                     .Select(f => new Match()
                     {
                         Player1 = f[0],
                         Player2 = f[1],
-                        Source = mg
+                        //Source = mg
                     }).ToList();
 
                 var results = new List<Result>();
 
-                //foreach (var match in matches)
-                //{
-                //    PlayMatch(match, sw, gameLogDirectory, results);
-                //}
+                foreach (var match in matches)
+                {
+                    PlayMatch(match, gameLogDirectory, results);
+                }
 
 
-                Parallel.ForEach(mg.Generate(matches),
-                    new ParallelOptions() {MaxDegreeOfParallelism = 8},
-                    match =>
-                    {
-                        var localMatch = match;
-                        try
-                        {
-                            PlayMatch(localMatch, gameLogDirectory, results);
-                        }
-                        finally
-                        {
-                            localMatch.IsCompleted();
-                        }
-                    });
+                //Parallel.ForEach(mg.Generate(matches),
+                //    new ParallelOptions()
+                //    {
+                //        MaxDegreeOfParallelism = 8
+                //    },
+                //    match =>
+                //    {
+                //        var localMatch = match;
+                //        try
+                //        {
+                //            PlayMatch(localMatch, gameLogDirectory, results);
+                //        }
+                //        finally
+                //        {
+                //            localMatch.IsCompleted();
+                //        }
+                //    });
 
                 foreach (var r in results)
                 {
@@ -291,7 +294,7 @@ namespace BigBang.Orchestrator
             sb.AppendLine("+--------------------------------------------------------------------------------------------+");
             sb.AppendFormat("| Starting Game between {0} & {1} \n", p1.Name, p2.Name);
             sb.AppendLine("| ");
-            for (var i = 0; i < 1; i++)
+            for (var i = 0; i < 100; i++)
             {
                 sw1.Reset();
                 sw1.Start();
